@@ -72,8 +72,8 @@ $ ->
     $.ajax(
       location.pathname,
         type: 'put'
-        value: JSON.stringify serializePath path
         data:
+          value: JSON.stringify serializePath path
           drawing_id: drawing_id(),
           graphic_id: path.graphic_id
           z: 1
