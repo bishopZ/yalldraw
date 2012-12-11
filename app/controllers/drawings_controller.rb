@@ -9,14 +9,12 @@ class DrawingsController < ApplicationController
   end
 
   def add
-    (access_error && return) unless can_modify_drawing params[:id]
+    (access_error && return) unless can_modify_drawing params[:drawing_id]
 
-    debugger
     graphic = Drawing
-      .find(params[:id])
+      .find(params[:drawing_id])
       .graphics
-      .add(current_user.id, params[:id], params[:value])
-      .save
+      .add(current_user.id, params[:drawing_id], params[:value])
 
     render json: graphic
   end
@@ -35,11 +33,11 @@ class DrawingsController < ApplicationController
   end
 
   def remove
-    (access_error && return) unless can_modify_drawing params[:id]
-    (access_error && return) unless can_modify_graphic params[:id], params[:graphic_id]
+    (access_error && return) unless can_modify_drawing params[:drawing_id]
+    (access_error && return) unless can_modify_graphic params[:drawing_id], params[:graphic_id]
 
     Drawing
-      .find(params[:id])
+      .find(params[:drawing_id])
       .graphics
       .remove params[:graphic_id]
 
