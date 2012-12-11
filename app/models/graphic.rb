@@ -17,7 +17,7 @@ class Graphic < ActiveRecord::Base
   end
 
   def self.complete
-    "[#{all.inject([]){ |list, g| list << g.value } * ','}]"
+    "[#{where('value is not null').inject([]){ |list, g| list << g.value } * ','}]"
   end
 
   def self.modify(graphic_id, value, z)
