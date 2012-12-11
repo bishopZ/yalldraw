@@ -10,6 +10,6 @@ Yalldraw::Application.routes.draw do
 
   resources :drawings, except: [:edit, :index] do
     post 'add'
-    post 'remove'
+    delete 'remove'
   end
 end

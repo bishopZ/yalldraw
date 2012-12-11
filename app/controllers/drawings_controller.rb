@@ -1,7 +1,7 @@
 class DrawingsController < ApplicationController
   def show
-    @drawing = Drawing.joins(:graphics).first
-    @values = @drawing.graphics.complete
+    @drawing = Drawing.find_by_id(params[:id]) || Drawing.first
+    @values = @drawing.graphics.complete || []
     render 'index'
   end
 

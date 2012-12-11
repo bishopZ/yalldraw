@@ -27,9 +27,11 @@ $ ->
   drawing_id = -> $('body').data 'drawing-id'
 
   remove = (path) ->
-    $.post '/drawing/remove'
-      graphic_id: path.graphic_id
-      drawing_id: drawing_id()
+    $.ajax location.pathname + '/remove',
+      type: 'delete'
+      data:
+        graphic_id: path.graphic_id
+        drawing_id: drawing_id()
 
   style = ->
       strokeColor:  $('input#fg-color').val()
