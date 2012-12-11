@@ -7,6 +7,7 @@ class Graphic < ActiveRecord::Base
       g.user_id = user_id
       g.value = value
       g.z = (Graphic.maximum(:z) || 0) + 1
+      # save twice because we need to put the graphic id in the complete JSON
       g.save
 
       json = ActiveSupport::JSON.decode value
