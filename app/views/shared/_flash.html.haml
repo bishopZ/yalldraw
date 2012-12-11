@@ -1,0 +1,3 @@
+- [:notice, :error, :success].each do |key|
+  - unless !flash || flash[key].blank?
+    %p{ :class => "flash #{key}" }= flash[key] 

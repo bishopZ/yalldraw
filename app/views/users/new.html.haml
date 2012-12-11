@@ -1,0 +1,37 @@
+=render 'shared/header'
+
+.container
+  =render 'shared/flash'
+  .row
+    %legend User Registration:
+  .row
+    .span8
+      =form_for User.new, url: users_path, class: 'form-horizontal' do |f|
+        %fieldset
+          %ol
+            %li
+              =f.label :name, 'Name:'
+              =f.text_field :name, placeholder: 'Type your name here please...'
+            %li
+              =f.label 'Password:'
+              =f.password_field :password, placeholder: 'Type your password here...'
+            %li
+              =f.label 'Password:'
+              =f.password_field :password1, placeholder: 'Type your password here...'
+          =f.button 'Register', class: 'btn btn-success'
+
+    .span4
+      .row
+        %h2 Testimonials:
+      .row
+        %blockquote
+          %p I finally found the medium of expression I've been looking for
+          %small Leonardo DaVinci
+
+        %blockquote
+          %p I am so glad I signed up, I love it!
+          %small Everyone who registered
+
+        %blockquote
+          %p Now all I want to do is draw
+          %small Trent

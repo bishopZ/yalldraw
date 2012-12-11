@@ -1,0 +1,25 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{ 'data-toggle' => 'collapse', 'data-target' => '.nav-collapse' }
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{ href: '/' } Yall Draw
+      .nav-collapse#main-menu
+        %ul.nav.main-menu-left
+          %li
+            %a{ :href => '/drawings/new' } Create
+          - if current_user.present?
+            %li
+              %a{ :href => '/users/logout' } Logout
+            %li
+              %a{ :href => "/users/#{current_user.id}" }= current_user.name
+          - else
+            %li
+              %a{ :href => '/users' } Login
+            %li
+              %a{ :href => '/users/new' } Register
+
+%p &nbsp;
+%p &nbsp;

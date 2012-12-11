@@ -1,0 +1,50 @@
+=render 'shared/header'
+%script
+  ! vectors = JSON.parse('#{@values || '{}'}');
+
+.container
+  %header.jumbotron.subhead#overview
+    .row
+      .span6
+        %h3 Yall Draw &mdash; Collab-Drawings
+
+  .row
+    .span9#canvas-container
+      %canvas
+    .tool-contain.span3
+      %h2 Tools
+      .center
+        .row
+          .btn-group{ 'data-toggle' => 'buttons-radio' }
+            %button.btn arrow
+            %button.btn point
+            %p
+            %button.btn freeform
+            %button.btn line
+            %button.btn brush
+            %p
+            %button.btn rectangle
+            %button.btn circle
+
+      %hs Brush Size:
+      .row
+        .span1
+          %input#brush-size-text{ :value => 6, :type => 'text' }
+        .slider.span2
+          #brush-size-slider
+
+      %ul
+        %li
+          %label{ for: 'fg-color' }
+            %h2 Stroke:
+          %input#fg-color{ :value => '#000000', :name => 'fg-color', :type => 'text' }
+
+        %li
+          %label{ for: 'bg-color' }
+            %h2 Fill:
+          %input#bg-color{ :value => '#FF1493', :name => 'bg-color', :type => 'text' }
+
+  .row
+    .span9#save
+      .btn-group
+        %button.btn#save Save

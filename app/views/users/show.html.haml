@@ -1,0 +1,25 @@
+=render 'shared/header'
+
+.container
+  =render 'shared/flash'
+  .row
+    %legend User: #{@user.name}
+  .row
+    .span8
+      %table.table.table-striped#drawings
+        %thead
+          %tr
+            %th #
+            %th Title
+            %th Created
+            %th &nbsp;
+        %tbody
+          -@drawings.each_with_index do |d, i|
+            %tr
+              %td.count #{i + 1}
+              %td
+                =link_to d.slug, drawing_path(d)
+              %td sup
+              %td
+                - if @editable
+                  %button.btn.drawing-delete{ 'data-drawing' => d.id } delete

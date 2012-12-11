@@ -1,0 +1,18 @@
+=render 'shared/header'
+
+.container
+  =render 'shared/flash'
+  .row
+    %legend User Login:
+  .row
+    .span8
+      =form_for User.new, url: login_users_path, class: 'form-horizontal' do |f|
+        %fieldset
+          %ol
+            %li
+              =f.label :name, 'Name:'
+              =f.text_field :name, placeholder: 'Type your name here please...'
+            %li
+              =f.label :password, 'Password'
+              =f.password_field :password, placeholder: 'Type your password here please...'
+          =f.button 'Login', class: 'btn btn-success'

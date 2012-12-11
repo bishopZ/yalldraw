@@ -1,0 +1,15 @@
+=render 'shared/header'
+
+.container
+  =render 'shared/flash'
+  .row
+    %legend Drawing creation:
+  .row
+    .span8
+      =form_tag drawings_path do
+        %fieldset
+          %ol
+            %li
+              %label{ :form => 'slug' } Title:
+              %input.name{ :name => 'slug', :type => 'text', :placeholder => 'Type your drawings title here: ' }
+          %button.btn.btn-success Create
