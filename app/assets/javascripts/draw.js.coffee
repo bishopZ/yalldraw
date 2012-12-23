@@ -9,21 +9,6 @@ $ ->
   refresh = ->
     paper.view.draw()
 
-  serializeColor = (color) ->
-    return null if !color?
-    red: color.red
-    green: color.green
-    blue: color.blue
-
-  serializeStyle = (item) ->
-    return null if !item?
-    fillColor: serializeColor item.fillColor
-    miterLimit: item.miterLimit
-    strokeColor: serializeColor item.strokeColor
-    strokeCap: item.strokeCap
-    strokeJoin: item.strokeJoin
-    strokeWidth: item.strokeWidth
-
   drawing_id = -> $('body').data 'drawing-id'
 
   remove = (path) ->
@@ -46,18 +31,6 @@ $ ->
   $('.ui-slider').slider
     change: =>
       updateStyle()
-
-  serializePath = (path) ->
-    segs = []
-    for s in path.segments
-      segs.push [s.point.x, s.point.y,
-          s.handleIn.x, s.handleIn.y,
-          s.handleOut.x, s.handleOut.y]
-
-    'points': segs
-    'style' : serializeStyle path.style
-    'graphic_id' : path.graphic_id
-    'type' : path.type
 
   save = (path) ->
     $.post(
