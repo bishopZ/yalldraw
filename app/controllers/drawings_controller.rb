@@ -1,4 +1,8 @@
 class DrawingsController < ApplicationController
+  def index
+    show
+  end
+
   def show
     @drawing = Drawing.find_by_id(params[:id]) || Drawing.first
     @values = @drawing.graphics.complete || []
@@ -78,13 +82,13 @@ class DrawingsController < ApplicationController
   end
 
   def create
-    Drawing.create_blank current_user, params[:slug]
-    redirect_to "/#{current_user.name}/#{params[:slug]}"
-
-    rescue ArgumentError
-
-    flash[:error] = 'Error in registration'
-    input_error 'Name already taken', '/users/new'
+    drawing = Drawing.create_blank current_user, params[:slug]
+    if drawing
+      redirect_to drawing_path(drawing)
+    else
+      flash[:error] = 'Error in registration'
+      redirect_to new_drawing_path
+    end
   end
 
   private
