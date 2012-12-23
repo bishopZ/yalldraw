@@ -13,39 +13,37 @@ class DrawingsController < ApplicationController
   end
 
   def add
-    (access_error && return) unless can_modify_drawing params[:drawing_id]
+    if can_modify_drawing params[:drawing_id]
+      graphic = Drawing.find(params[:drawing_id]).graphics
+        .add(current_user.id, params[:drawing_id], params[:value])
 
-    graphic = Drawing
-      .find(params[:drawing_id])
-      .graphics
-      .add(current_user.id, params[:drawing_id], params[:value])
-
-    render json: graphic
+      render json: graphic
+    else
+      access_error
+    end
   end
 
   def update
-    (access_error && return) unless can_modify_drawing params[:id]
-    (access_error && return) unless can_modify_graphic params[:id], params[:id]
+    if can_modify_drawing(params[:id]) && can_modify_graphic(params[:id], params[:drawing_id])
+      Drawing.find(params[:id]).graphics
+        .modify(params[:graphic_id], params[:value], params[:z])
+        .save
 
-    Drawing
-      .find(params[:id])
-      .graphics
-      .modify(params[:graphic_id], params[:value], params[:z])
-      .save
-
-    render nothing: true
+      render nothing: true
+    else
+      access_error
+    end
   end
 
   def remove
-    (access_error && return) unless can_modify_drawing params[:drawing_id]
-    (access_error && return) unless can_modify_graphic params[:drawing_id], params[:graphic_id]
+    if can_modify_drawing(params[:id]) && can_modify_graphic(params[:id], params[:drawing_id])
+      Drawing.find(params[:drawing_id]).graphics
+        .remove params[:graphic_id]
 
-    Drawing
-      .find(params[:drawing_id])
-      .graphics
-      .remove params[:graphic_id]
-
-    render nothing: true
+      render nothing: true
+    else
+      access_error
+    end
   end
 
   def save
