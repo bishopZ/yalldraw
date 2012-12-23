@@ -35,13 +35,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    User.register(params[:user][:name], params[:user][:password], params[:user][:password1]).save
-    redirect_to '/'
-
-    rescue ArgumentError
-
-    flash[:error] = 'Error in registration'
-    input_error 'Name already taken', new_user_path
+    @user = User.register(params[:user])
+    if @user.save
+      flash[:notice] = "Congratulations: #{@user.name}, welcome to yalldraw"
+      redirect_to new_drawing_path
+    else
+      render :action => :new
+    end
   end
 
   private

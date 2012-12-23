@@ -8,16 +8,15 @@ class User < ActiveRecord::Base
     find_by_name_and_password(name, encrypt(password))
   end
 
-  def self.register(name, password, password_again)
+  def self.register(params)
     # TODO: these should be validated
-    raise(ArgumentError, 'Passwords do not match') unless password == password_again
-    raise(ArgumentError, 'Name too short') if name.size < 3
-    raise(ArgumentError, "Cannot duplicate user with name: #{name}") if User.find_by_name name
+    return false unless params[:password] == params[:password1]
+    return false if params[:name].size < 3
+    return false if find_by_name name
 
     new.tap do |u|
-      u.name = name
-      u.password = encrypt password
-      u.save
+      u.name = params[:name]
+      u.password = encrypt params[:password]
     end
   end
 
