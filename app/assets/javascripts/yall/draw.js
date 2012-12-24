@@ -11,7 +11,6 @@ $(function() {
   rawCanvas.style.height = rawCanvas.height = h;
 
   yall.init(rawCanvas);
-  yall.initTool();
 });
   /**
    * Perisister
