@@ -1,18 +1,18 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :password
+  has_many :drawings
 
   validates_uniqueness_of :name
-  has_many :drawings
+  validates :name, presence: true,
+    length: { :minimum => 4, :maximum => 40 }
+  validates :password, presence: true,
+    length: { :minimum => 5, :maximum => 40 }
 
   def self.login(name, password)
     find_by_name_and_password(name, encrypt(password))
   end
 
   def self.register(params)
-    # TODO: these should be validated
     return false unless params[:password] == params[:password1]
-    return false if params[:name].size < 3
-    return false if find_by_name name
 
     new.tap do |u|
       u.name = params[:name]
