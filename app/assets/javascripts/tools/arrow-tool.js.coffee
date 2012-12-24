@@ -1,5 +1,5 @@
 $ ->
-  class paper.ArrowTool extends Tool
+  class paper.ArrowTool extends paper.Tool
     constructor: (point) ->
       super()
       @modifyListeners = []
@@ -11,8 +11,7 @@ $ ->
         tolerance : 5
 
     onMouseDown: (e) ->
-      console.log 'mouseDown'
-      hitTest = project.hitTest e.point, @hitOptions
+      hitTest = paper.project.hitTest e.point, @hitOptions
       if hitTest
         @softSelected = hitTest.item
         @point    = e.point
@@ -28,7 +27,7 @@ $ ->
       refresh()
 
     onMouseMove: (e) ->
-      hitTest = project.hitTest e.point, @hitOptions
+      hitTest = paper.project.hitTest e.point, @hitOptions
       if hitTest
         noSelect()
         hitTest.item.selected = true
@@ -50,7 +49,7 @@ $ ->
        refresh()
 
     noSelect = ->
-      v.selected = false for v in project.selectedItems
+      v.selected = false for v in paper.project.selectedItems
 
     refresh = ->
       paper.view.draw()

@@ -17,4 +17,4 @@
 //= require twitter/bootstrap
 //= require paper
 //= require_tree ./tools
-//= require_tree .
+//= require_tree ./yall

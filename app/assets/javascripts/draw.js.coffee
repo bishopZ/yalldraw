@@ -4,11 +4,8 @@ $ ->
   canvas    = $ 'canvas'
   return if !canvas.length
   rawCanvas = canvas[0]
-  context   = rawCanvas.getContext '2d'
 
-  refresh = ->
-    paper.view.draw()
-
+  return
   drawing_id = -> $('body').data 'drawing-id'
 
   remove = (path) ->
@@ -17,20 +14,6 @@ $ ->
       data:
         graphic_id: path.graphic_id
         drawing_id: drawing_id()
-
-  style = ->
-      strokeColor:  $('input#fg-color').val()
-      strokeWidth:  $('#brush-size-text').val()
-      fillColor:    $('input#bg-color').val()
-
-  updateStyle = =>
-    @toolHandler.styleChange style()
-
-  $.colorpicker.setDefaults
-    onSelect: => updateStyle()
-  $('.ui-slider').slider
-    change: =>
-      updateStyle()
 
   save = (path) ->
     $.post(
@@ -51,25 +34,6 @@ $ ->
           graphic_id: path.graphic_id
           z: 1
     )
-
-  paper.setup rawCanvas
-
-  $('.btn-group button').on 'click', (e)=>
-    toolName = $(e.srcElement).text().toLowerCase()
-
-    if toolName == 'arrow'
-      paper.tool = @arrowTool
-    else
-      @toolHandler.switchTool toolName
-      paper.tool = @toolHandler
-
-  @toolHandler = new paper.ToolHandler style()
-  @arrowTool = new paper.ArrowTool()
-
-  paper.tool = @toolHandler
-
-  pathEvent = (e, path) =>
-    console.log 'new'
 
   @toolHandler.bind 'add', (path) =>
     save path if path

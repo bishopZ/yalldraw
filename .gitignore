@@ -24,3 +24,4 @@ rerun.txt
 config/database.yml
 config/fog.yml
 /solr
+**.swp

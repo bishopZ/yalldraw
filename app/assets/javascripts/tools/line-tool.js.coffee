@@ -1,8 +1,8 @@
 $ ->
-  class paper.LineTool extends Tool
+  class paper.LineTool extends paper.Tool
     constructor: (point) ->
       super()
-      @path = new Path.Line point, point
+      @path = new paper.Path.Line point, point
       @path.type = 'Line'
 
     onMouseDrag: (point) ->

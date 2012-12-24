@@ -1,8 +1,8 @@
 $ ->
-  class paper.FreeformTool extends Tool
+  class paper.FreeformTool extends paper.Tool
     constructor: (point) ->
       super()
-      @path = new Path point
+      @path = new paper.Path point
       @path.type = 'Freeform'
 
     onMouseDrag: (point) ->

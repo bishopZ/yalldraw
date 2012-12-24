@@ -1,5 +1,5 @@
 $ ->
-  class paper.ToolDelegator extends Tool
+  class paper.ToolDelegator extends paper.Tool
     onMouseDrag: (e) ->
       return if !@tool or !@tool.onMouseDrag
       @tool.onMouseDrag e.point
