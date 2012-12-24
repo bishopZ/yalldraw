@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Drawing do
-  let(:drawing) { Drawing.new(slug: 'whatever', user: stub_model(User)) }
+  let(:drawing) { Drawing.new(slug: 'whatever', user: User.new) }
 
   it 'is invalid with no slug' do
     drawing.slug = nil
