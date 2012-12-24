@@ -27,9 +27,4 @@ class Graphic < ActiveRecord::Base
       g.z = z
     end
   end
-
-  def self.remove(graphic_id)
-    find(graphic_id)
-      .destroy
-  end
 end
