@@ -16,7 +16,7 @@ var yall = (function(my) {
     var path = new paper.Path();
     path.style = vector.style;
     path.graphic_id = vector.graphic_id;
-    path.closed = !!vector.type;
+    path.closed = vector.type !== 'Freeform';
 
     vector.points.map(function(point) {
       path.add(yall.renderSegment(point));
