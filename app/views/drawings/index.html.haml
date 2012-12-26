@@ -3,11 +3,6 @@
   ! vectors = JSON.parse('#{@values || '{}'}');
 
 .container
-  %header.jumbotron.subhead#overview
-    .row
-      .span6
-        %h3 Yall Draw &mdash; Collab-Drawings
-
   .row
     .span9#canvas-container
       %canvas
@@ -17,11 +12,9 @@
         .row
           .btn-group{ 'data-toggle' => 'buttons-radio' }
             %button.btn arrow
-            %button.btn point
             %p
             %button.btn freeform
             %button.btn line
-            %button.btn brush
             %p
             %button.btn rectangle
             %button.btn circle
