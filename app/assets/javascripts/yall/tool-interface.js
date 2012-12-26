@@ -26,7 +26,7 @@ var yall = (function(my) {
     });
 
     $('.btn-group button').on('click', function(e) {
-      toolName = $(e.srcElement).text().toLowerCase();
+      toolName = $(e.currentTarget).text().toLowerCase();
 
       if (toolName === 'arrow') {
         paper.tool = new paper.ArrowTool();
