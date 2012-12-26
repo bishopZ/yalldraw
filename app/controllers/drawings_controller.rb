@@ -37,8 +37,10 @@ class DrawingsController < ApplicationController
 
   def remove
     if can_modify_drawing(params[:id]) && can_modify_graphic(params[:id], params[:drawing_id])
-      Drawing.find(params[:drawing_id]).graphics
-        .remove params[:graphic_id]
+      Drawing
+        .find(params[:drawing_id])
+        .graphics
+        .destroy params[:graphic_id]
 
       render nothing: true
     else

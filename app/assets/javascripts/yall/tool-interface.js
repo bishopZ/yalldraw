@@ -3,7 +3,7 @@ var yall = (function(my) {
 
   my.initTool = function () {
     tool = new paper.ToolHandler(this.style());
-    tool.bind('add', yall.persister);
+    tool.bind('add', yall.persister.add);
 
     var colorOptions = {
       realtime: true,
@@ -30,6 +30,7 @@ var yall = (function(my) {
 
       if (toolName === 'arrow') {
         paper.tool = new paper.ArrowTool();
+        paper.tool.bind('remove', yall.persister.remove);
       } else {
         yall.getTool().switchTool(toolName);
         paper.tool = yall.getTool();
