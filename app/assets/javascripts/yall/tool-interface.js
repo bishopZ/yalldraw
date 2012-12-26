@@ -22,7 +22,12 @@ var yall = (function(my) {
       value: 6,
       slide: function() {
         $('#brush-size-text').val($('#brush-size-slider').slider('value'))
+        $('#brush-size-text').trigger('change');
       }
+    });
+
+    $('input#brush-size-text').change(function() {
+      my.updateStyle();
     });
 
     $('.btn-group button').on('click', function(e) {

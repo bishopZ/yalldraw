@@ -3,14 +3,10 @@ var yall = (function(my) {
     return {
       'add': function(path) {
         str = JSON.stringify(yall.serializePath(path));
-        console.log(str);
         $.post(
           location.pathname + '/add',
           {
             value: JSON.stringify(yall.serializePath(path)),
-          },
-          function(e) {
-            console.log(e);
           }
         )
       },
