@@ -14,6 +14,18 @@ var yall = (function(my) {
           }
         )
       },
+      'modify': function(path) {
+        $.ajax(
+          location.pathname,
+          {
+            type: 'put',
+            data: {
+              value: JSON.stringify(yall.serializePath(path)),
+              graphic_id: path.graphic_id
+            }
+          }
+        );
+      },
       'remove': function(path) {
         $.ajax(
           location.pathname + '/remove',

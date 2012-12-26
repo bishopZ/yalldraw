@@ -31,6 +31,7 @@ var yall = (function(my) {
       if (toolName === 'arrow') {
         paper.tool = new paper.ArrowTool();
         paper.tool.bind('remove', yall.persister.remove);
+        paper.tool.bind('modify', yall.persister.modify);
       } else {
         yall.getTool().switchTool(toolName);
         paper.tool = yall.getTool();
