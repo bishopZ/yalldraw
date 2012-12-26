@@ -14,7 +14,9 @@ class DrawingsController < ApplicationController
 
   def add
     if can_modify_drawing params[:drawing_id]
-      graphic = Drawing.find(params[:drawing_id]).graphics
+      graphic = Drawing
+        .find(params[:drawing_id])
+        .graphics
         .add(current_user.id, params[:drawing_id], params[:value])
 
       render json: graphic
@@ -25,7 +27,9 @@ class DrawingsController < ApplicationController
 
   def update
     if can_modify_drawing(params[:id]) && can_modify_graphic(params[:id], params[:drawing_id])
-      Drawing.find(params[:id]).graphics
+      Drawing
+        .find(params[:id])
+        .graphics
         .modify(params[:graphic_id], params[:value], params[:z])
         .save
 
