@@ -18,13 +18,16 @@ class Graphic < ActiveRecord::Base
   end
 
   def self.complete
-    "[#{where('value is not null').inject([]){ |list, g| list << g.value } * ','}]"
+    "[#{where('value is not null')
+        .order(:z)
+        .inject([]) do |list, g|
+          list << g.value
+        end * ','}]"
   end
 
-  def self.modify(graphic_id, value, z)
-    find(graphic_id).tap do |g|
-      g.value = value
-      g.z = z
-    end
+  def modify(value, z = nil)
+    self.value = value
+    self.z = z if z
+    self
   end
 end

@@ -30,7 +30,8 @@ class DrawingsController < ApplicationController
       Drawing
         .find(params[:id])
         .graphics
-        .modify(params[:graphic_id], params[:value], params[:z])
+        .find(params[:graphic_id])
+        .modify(params[:value], params[:z])
         .save
 
       render nothing: true

@@ -25,3 +25,4 @@ config/database.yml
 config/fog.yml
 /solr
 **.swp
+**.swo
