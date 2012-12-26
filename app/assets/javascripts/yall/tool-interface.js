@@ -3,6 +3,7 @@ var yall = (function(my) {
 
   my.initTool = function () {
     tool = new paper.ToolHandler(this.style());
+    tool.bind('add', yall.persister);
 
     var colorOptions = {
       realtime: true,

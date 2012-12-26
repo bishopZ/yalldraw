@@ -12,6 +12,5 @@ $ ->
       segs = @path.segments
       @path.simplify(100)
       if segs[0].point.getDistance(point) < 10
-        @path.add new Point segs[0].point
+        @path.add new paper.Point segs[0].point
         @path.closed = true
-

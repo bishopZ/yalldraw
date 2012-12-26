@@ -3,10 +3,11 @@ var yall = (function(my) {
     paper.view.draw();
   };
 
-  my.init = function (canvas) {
+  my.init = function (canvas, vectors) {
     this.canvas = canvas;
     paper.setup(canvas);
     yall.initTool();
+    yall.render(vectors);
   };
 
   return my;

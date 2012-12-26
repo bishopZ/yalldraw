@@ -18,7 +18,9 @@ var yall = (function(my) {
     path.graphic_id = vector.graphic_id;
     path.closed = !!vector.type;
 
-    vector.points.map(function(point) { yall.renderSegment(point); });
+    vector.points.map(function(point) {
+      path.add(yall.renderSegment(point));
+    });
     return path;
   };
 
@@ -26,7 +28,7 @@ var yall = (function(my) {
     return new paper.Segment(
       new paper.Point(point[0], point[1]),
       new paper.Point(point[2], point[3]),
-      new paper.Point(Point[4], point[5])
+      new paper.Point(point[4], point[5])
     );
   };
 

@@ -10,7 +10,7 @@ $(function() {
   rawCanvas.style.width = rawCanvas.width  = w;
   rawCanvas.style.height = rawCanvas.height = h;
 
-  yall.init(rawCanvas);
+  yall.init(rawCanvas, vectors);
 });
   /**
    * Perisister
