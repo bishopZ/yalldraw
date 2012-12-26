@@ -33,7 +33,10 @@ describe UsersController, 'Login user' do
   context 'when successful login' do
     let(:login_params) { { :user => {} } }
     it 'should set user.id in session' do
-      User.stubs(:login).returns(User.create(id: 3, name: 'super'))
+      User.stubs(:login).returns(User.new.tap do |u|
+        u.id = 3
+        u.name = 'super'
+      end)
       post 'login', login_params
       session[:user_id].should_not be_nil
     end
