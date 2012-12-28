@@ -10,21 +10,13 @@ $(function() {
   rawCanvas.style.width = rawCanvas.width  = w;
   rawCanvas.style.height = rawCanvas.height = h;
 
-  canvas.on('mousewheel', function(e) { yall.mouseWheel(e.originalEvent.wheelDelta); });
+  // middle mouse scroll
+  var mouseWheelEvent = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel"
+  canvas.on(mouseWheelEvent, function(e) {
+    e.preventDefault();
+    var event = e.originalEvent;
+    yall.mouseWheel(event.wheelDelta, event.offsetX, event.offsetY);
+  });
 
   yall.init(rawCanvas, vectors);
 });
-  /**
-   * Perisister
-   *    ajax remove
-   *    ajax save
-   *    ajax modify
-   *
-   * PathInitializer
-   *    load dom json into paper initally
-   *
-   * Styler
-   *    get current style
-   *    set current style
-   *
-   */
