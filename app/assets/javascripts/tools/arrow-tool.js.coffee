@@ -2,7 +2,7 @@ $ ->
   class paper.ArrowTool extends paper.Tool
     constructor: (point) ->
       super()
-      @selectedItems = []
+      @selection = null
       @modifyListeners = []
       @removeListeners = []
       @selectListeners = []
@@ -14,31 +14,32 @@ $ ->
     onMouseDown: (e) ->
       hitTest = paper.project.hitTest e.point, @hitOptions
       if hitTest
-        @selected = [hitTest.item]
         @point = e.point
+        @addSelection hitTest.item
+      else
+        @selection = null
 
     onMouseDrag:  (e) ->
-      return if !@selected.length
-
-      if @p
-        s.translate @p.negate() for s in @selected
+      return if !@selection
+      if @p and @selection
+        @selection.translate @p.negate()
       @p = e.point.subtract @point
-      s.translate @p for s in @selected
+      @selection.translate @p if @selection
       refresh()
 
     onMouseMove: (e) ->
       hitTest = paper.project.hitTest e.point, @hitOptions
-      if hitTest
-        noSelect()
-        hitTest.item.selected = true
-        @keySelection = hitTest.item
-      else
-        noSelect()
+      noHoverSelect()
+      return if !hitTest or @isBox hitTest.item
+
+      hitTest.item.selected = true
+      @keySelection = hitTest.item
 
     onMouseUp: (e) ->
-      @trigger 'modify', s for s in @selected
+      if @selection
+        for s in @selection.children
+          @trigger 'modify', s unless s.box
       @point = @p = null
-      @selected = []
 
     onKeyDown:  (e) ->
       if @keySelection and e.key == 'delete'
@@ -46,7 +47,41 @@ $ ->
         @trigger 'remove', @keySelection
         refresh()
 
-    noSelect = ->
+    isBox: (item) ->
+      return false if !@selection
+      @selection.isChild item
+
+    addSelection: (item) ->
+      item.selected = false
+
+      if @selection
+        @selection.addChild(item)
+        @selection.lastChild = @boundingBox @selection
+      else
+        @selection = new paper.Group()
+        @selection.addChild item
+        @selection.addChild @boundingBox item
+      @selection.lastChild.style.strokeColor = 'black'
+      @selection.lastChild.style.fillColor = 'white'
+      refresh()
+
+    boundingBox: (item) ->
+      size = 10
+      nE = paper.Path.Rectangle item.bounds.topLeft.clone(), size
+      n = paper.Path.Rectangle item.bounds.topCenter.clone(), size
+      nW = paper.Path.Rectangle item.bounds.topRight.clone(), size
+      w = paper.Path.Rectangle item.bounds.rightCenter.clone(), size
+      sW = paper.Path.Rectangle item.bounds.bottomRight.clone(), size
+      s = paper.Path.Rectangle item.bounds.bottomCenter.clone(), size
+      sE = paper.Path.Rectangle item.bounds.bottomLeft.clone(), size
+      e = paper.Path.Rectangle item.bounds.leftCenter.clone(), size
+      points = [nE, n, nW, w, sW, s, sE, e]
+      g = new paper.Group points
+      g.box = true
+      g.translate(new paper.Point(size * -.5, size * -.5))
+      g
+
+    noHoverSelect = ->
       v.selected = false for v in paper.project.selectedItems
 
     refresh = ->
