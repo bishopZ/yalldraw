@@ -10,6 +10,8 @@ $(function() {
   rawCanvas.style.width = rawCanvas.width  = w;
   rawCanvas.style.height = rawCanvas.height = h;
 
+  canvas.on('mousewheel', function(e) { yall.mouseWheel(e.originalEvent.wheelDelta); });
+
   yall.init(rawCanvas, vectors);
 });
   /**
