@@ -2,6 +2,7 @@ $ ->
   class paper.ArrowTool extends paper.Tool
     constructor: (point) ->
       super()
+      @selectedItems = []
       @modifyListeners = []
       @removeListeners = []
       @selectListeners = []
@@ -13,17 +14,16 @@ $ ->
     onMouseDown: (e) ->
       hitTest = paper.project.hitTest e.point, @hitOptions
       if hitTest
-        @softSelected = hitTest.item
-        @point    = e.point
+        @selected = [hitTest.item]
+        @point = e.point
 
     onMouseDrag:  (e) ->
-      if !@softSelected
-        return
+      return if !@selected.length
 
       if @p
-        @softSelected.translate @p.negate()
+        s.translate @p.negate() for s in @selected
       @p = e.point.subtract @point
-      @softSelected.translate @p
+      s.translate @p for s in @selected
       refresh()
 
     onMouseMove: (e) ->
@@ -36,17 +36,15 @@ $ ->
         noSelect()
 
     onMouseUp: (e) ->
-      if @hardSelected
-        console.log 'dont know what to do'
-      else if @softSelected
-        @trigger 'modify', @softSelected if @softSelected
-        @softSelected = @point = @p = null
+      @trigger 'modify', s for s in @selected
+      @point = @p = null
+      @selected = []
 
     onKeyDown:  (e) ->
-     if @keySelection and e.key == 'delete'
-       @keySelection.remove()
-       @trigger 'remove', @keySelection
-       refresh()
+      if @keySelection and e.key == 'delete'
+        @keySelection.remove()
+        @trigger 'remove', @keySelection
+        refresh()
 
     noSelect = ->
       v.selected = false for v in paper.project.selectedItems
