@@ -13,6 +13,8 @@ $ ->
 
     onMouseDown: (e) ->
       hitTest = paper.project.hitTest e.point, @hitOptions
+      @unSelect() unless hitTest
+      return if @selection and @selection.isChild hitTest.item
       @unSelect() if !e.event.shiftKey
       if hitTest
         @point = e.point
@@ -20,10 +22,8 @@ $ ->
 
     onMouseDrag:  (e) ->
       return if !@selection
-      if @p and @selection
-        @selection.translate @p.negate()
-      @p = e.point.subtract @point
-      @selection.translate @p if @selection
+
+      @selection.translate e.delta
       refresh()
 
     onMouseMove: (e) ->
