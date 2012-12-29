@@ -13,11 +13,10 @@ $ ->
 
     onMouseDown: (e) ->
       hitTest = paper.project.hitTest e.point, @hitOptions
+      @unSelect() if !e.event.shiftKey
       if hitTest
         @point = e.point
         @addSelection hitTest.item
-      else
-        @selection = null
 
     onMouseDrag:  (e) ->
       return if !@selection
@@ -47,16 +46,26 @@ $ ->
         @trigger 'remove', @keySelection
         refresh()
 
+    unSelect: ->
+      return if !@selection
+      while @selection.children.length > 1
+        paper.project.activeLayer.addChild @selection.children[0] unless @selection.children[0].box
+      @selection.remove()
+      @selection = null
+
     isBox: (item) ->
       return false if !@selection
-      @selection.isChild item
+      return true if item.box
+      return @selection.isChild item
 
     addSelection: (item) ->
+      return false if @selection and @selection.isChild(item)
       item.selected = false
 
       if @selection
-        @selection.addChild(item)
-        @selection.lastChild = @boundingBox @selection
+        @selection.lastChild.remove()
+        @selection.addChild item
+        @selection.addChild @boundingBox @selection
       else
         @selection = new paper.Group()
         @selection.addChild item
@@ -76,6 +85,7 @@ $ ->
       sE = paper.Path.Rectangle item.bounds.bottomLeft.clone(), size
       e = paper.Path.Rectangle item.bounds.leftCenter.clone(), size
       points = [nE, n, nW, w, sW, s, sE, e]
+      p.box = true for p in points
       g = new paper.Group points
       g.box = true
       g.translate(new paper.Point(size * -.5, size * -.5))
