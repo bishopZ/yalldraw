@@ -1,12 +1,6 @@
 class User < ActiveRecord::Base
   has_many :drawings
 
-  validates_uniqueness_of :name
-  validates :name, presence: true,
-    length: { :minimum => 4, :maximum => 40 }
-  validates :password, presence: true,
-    length: { :minimum => 5, :maximum => 40 }
-
   def self.login(name, password)
     find_by_name_and_password(name, encrypt(password))
   end

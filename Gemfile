@@ -1,7 +1,8 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.8'
-gem 'haml-rails'
+gem 'rails', github: 'rails/rails'
+gem 'arel', github: 'rails/arel'
+
 gem 'sqlite3'
 gem 'pg'
 gem 'redis'
@@ -13,12 +14,16 @@ gem 'debugger'
 group :development, :test do
   gem 'qunit-rails'
   gem 'rspec-rails-mocha'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sprockets-rails', github: 'rails/sprockets-rails'
+  gem 'sass-rails', github: 'rails/sass-rails'
+  gem 'coffee-rails', github: 'rails/coffee-rails'
   gem 'uglifier', '>= 1.0.3'
+  gem 'haml', github: 'haml/haml'
 end
 
 gem 'jquery-rails'

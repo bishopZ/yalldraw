@@ -12,6 +12,9 @@ $ ->
         stroke    : true
         tolerance : 5
 
+    styleChange: (s) ->
+      @selection.children.filter((e) -> e.type).map( (e) -> e.style = s )
+
     onMouseDown: (e) ->
       hitTest = paper.project.hitTest e.point, @hitOptions
       return if @selection and hitTest and @selection.isChild hitTest.item
@@ -27,9 +30,15 @@ $ ->
     onMouseDrag:  (e) ->
       if @resizeDirection
         @resize e
+        @resizeBoxes()
       else if @selection
         @selection.translate e.delta
         refresh()
+
+    resizeBoxes: ->
+      boxes = @selection.children.filter((e) -> e.box)[0].children
+      boxes.map (e) ->
+        e.bounds.width = e.bounds.height = 10
 
     onMouseMove: (e) ->
       hitTest = paper.project.hitTest e.point, @hitOptions

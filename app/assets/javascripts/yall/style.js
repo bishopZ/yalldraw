@@ -8,6 +8,10 @@ var yall = (function(my) {
   };
 
   my.updateStyle = function () {
+    if (paper.tool && paper.tool.selection) {
+      paper.tool.styleChange(my.style());
+    }
+
     if (my.getTool()) {
       my.getTool().styleChange(my.style());
     }

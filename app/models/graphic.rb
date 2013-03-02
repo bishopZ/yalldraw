@@ -1,5 +1,4 @@
 class Graphic < ActiveRecord::Base
-  attr_accessible :drawing, :type, :user, :value
   belongs_to :drawing
 
   def self.add(user_id, graphic_id, value)

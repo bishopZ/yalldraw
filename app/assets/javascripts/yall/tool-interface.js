@@ -2,7 +2,7 @@ var yall = (function(my) {
   var tool = null;
 
   my.initTool = function () {
-    tool = new paper.ToolHandler(this.style());
+    tool = new paper.ToolHandler(this.style && this.style());
     tool.bind('add', yall.persister.add);
 
     var colorOptions = {
