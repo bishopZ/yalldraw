@@ -4,6 +4,7 @@ $ ->
       super()
       @selection = null
       @modifyListeners = []
+      @box = null
       @removeListeners = []
       @selectListeners = []
       @resizeDirection
@@ -33,12 +34,29 @@ $ ->
         @resizeBoxes()
       else if @selection
         @selection.translate e.delta
-        refresh()
+        @resizeBoxes()
+      refresh()
 
     resizeBoxes: ->
-      boxes = @selection.children.filter((e) -> e.box)[0].children
-      boxes.map (e) ->
-        e.bounds.width = e.bounds.height = 10
+      return unless @box
+      ne = @box.children.filter((b) -> b.handle == 'nw')[0]
+      n = @box.children.filter((b) -> b.handle == 'n')[0]
+      nw = @box.children.filter((b) -> b.handle == 'ne')[0]
+      e = @box.children.filter((b) -> b.handle == 'w')[0]
+      se = @box.children.filter((b) -> b.handle == 'sw')[0]
+      s = @box.children.filter((b) -> b.handle == 's')[0]
+      sw = @box.children.filter((b) -> b.handle == 'se')[0]
+      w = @box.children.filter((b) -> b.handle == 'e')[0]
+
+      nw.setPosition @selection.bounds.getTopRight()
+      n.setPosition @selection.bounds.getTopCenter()
+      ne.setPosition @selection.bounds.getTopLeft()
+      w.setPosition @selection.bounds.getRightCenter()
+      sw.setPosition @selection.bounds.getBottomRight()
+      s.setPosition @selection.bounds.getBottomCenter()
+      se.setPosition @selection.bounds.getBottomLeft()
+      e.setPosition @selection.bounds.getLeftCenter()
+
 
     onMouseMove: (e) ->
       hitTest = paper.project.hitTest e.point, @hitOptions
@@ -80,8 +98,6 @@ $ ->
       else if @resizeDirection == 'sw'
         bounds = @selection.bounds.setBottomLeft e.point
 
-
-
       @selection.setBounds bounds
 
     setCursor: (item) ->
@@ -94,10 +110,11 @@ $ ->
 
     unSelect: ->
       return if !@selection
-      while @selection.children.length > 1
-        paper.project.activeLayer.addChild @selection.children[0] unless @selection.children[0].handle
+      while @selection.children.length
+        paper.project.activeLayer.addChild @selection.children[0]
       @selection.remove()
-      @selection = null
+      @box.remove()
+      @box = @selection = null
 
     isBox: (item) ->
       return false if !@selection
@@ -109,15 +126,18 @@ $ ->
       item.selected = false
 
       if @selection
-        @selection.lastChild.remove()
         @selection.addChild item
-        @selection.addChild @boundingBox @selection
+        @box.remove()
+        @box = @boundingBox @selection
+        paper.project.layers[0].addChild @box
       else
         @selection = new paper.Group()
         @selection.addChild item
-        @selection.addChild @boundingBox item
-      @selection.lastChild.style.strokeColor = 'black'
-      @selection.lastChild.style.fillColor = 'white'
+        @box = @boundingBox @selection
+        paper.project.layers[0].addChild @box
+
+      @box.style.strokeColor = 'black'
+      @box.style.fillColor = 'white'
       refresh()
 
     boundingBox: (item) ->
