@@ -10,6 +10,7 @@ $ ->
       @resizeDirection
       @hitOptions =
         segment   : true
+        fill      : true
         stroke    : true
         tolerance : 5
 
@@ -110,8 +111,17 @@ $ ->
 
     unSelect: ->
       return if !@selection
-      while @selection.children.length
-        paper.project.activeLayer.addChild @selection.children[0]
+      children = @selection.children.sort (a, b)->
+        a.index > b.index
+
+      i = 0
+      limit = @selection.children.length
+      while i++ < limit
+        paper.project.activeLayer.insertChild children[children.length - 1].oldIndex, children[children.length - 1]
+
+      #while @selection.children.length
+        #paper.project.activeLayer.insertChild @selection.children[0].oldIndex, @selection.children[0]
+
       @selection.remove()
       @box.remove()
       @box = @selection = null
@@ -126,15 +136,18 @@ $ ->
       item.selected = false
 
       if @selection
+        item.oldIndex = item.index
         @selection.addChild item
         @box.remove()
         @box = @boundingBox @selection
         paper.project.layers[0].addChild @box
       else
         @selection = new paper.Group()
-        @selection.addChild item
+        paper.project.activeLayer.insertChild item.index, @selection
+        nextHighest = item.nextSibling
+        item.oldIndex = item.index
+        @selection.insertChild item.index, item
         @box = @boundingBox @selection
-        paper.project.layers[0].addChild @box
 
       @box.style.strokeColor = 'black'
       @box.style.fillColor = 'white'
