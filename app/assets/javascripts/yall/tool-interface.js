@@ -38,6 +38,9 @@ var yall = (function(my) {
         paper.tool.bind('remove', yall.persister.remove);
         paper.tool.bind('modify', yall.persister.modify);
       } else {
+        if (paper.tool && paper.tool.unSelect)
+          paper.tool.unSelect();
+          my.refresh()
         yall.getTool().switchTool(toolName);
         paper.tool = yall.getTool();
       }
