@@ -19,7 +19,10 @@ $ ->
 
     onMouseDown: (e) ->
       hitTest = paper.project.hitTest e.point, @hitOptions
+
+      # do nothing if you click on whats already selected
       return if @selection and hitTest and @selection.isChild hitTest.item
+
       @unSelect() unless hitTest
 
       if hitTest and hitTest.item.handle
@@ -132,13 +135,16 @@ $ ->
       return @selection.isChild item
 
     addSelection: (item) ->
-      return false if @selection and @selection.isChild(item)
       item.selected = false
 
       if @selection
-        item.oldIndex = item.index
-        @selection.addChild item
         @box.remove()
+
+        if item.isAbove @selection
+          @selection.addChild item
+        else
+          @selection.insertChild 0, item
+
         @box = @boundingBox @selection
         paper.project.layers[0].addChild @box
       else
