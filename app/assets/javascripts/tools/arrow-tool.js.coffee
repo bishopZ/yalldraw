@@ -160,7 +160,7 @@ $ ->
       refresh()
 
     boundingBox: (item) ->
-      size = 10
+      size = Math.sqrt(Math.min @selection.strokeBounds.width, @selection.strokeBounds.height)
       nE = paper.Path.Rectangle item.bounds.topLeft.clone(), size
       n = paper.Path.Rectangle item.bounds.topCenter.clone(), size
       nW = paper.Path.Rectangle item.bounds.topRight.clone(), size
