@@ -15,8 +15,6 @@
 //= require jquery.ui.slider
 //= require colorpicker.js
 //= require twitter/bootstrap
-//= require underscore
 //= require paper
-//= require raleigh
 //= require_tree ./tools
 //= require_tree ./yall
