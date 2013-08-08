@@ -1,4 +1,4 @@
-$->
+$ ->
   class BoundingBox
     constructor: (item) ->
         size = Math.min 10, Math.sqrt(Math.min @selection.strokeBounds.width, @selection.strokeBounds.height)

@@ -1,3 +1,4 @@
+#= require tools/tool-delegator
 $ ->
   class paper.StateMachineTool extends paper.ToolDelegator
     constructor: (states, stateOptions) ->

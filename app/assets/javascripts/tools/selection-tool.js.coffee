@@ -1,3 +1,4 @@
+#= require tools/state-machine-tool
 $ ->
   class paper.SelectionTool extends paper.StateMachineTool
     constructor: () ->
