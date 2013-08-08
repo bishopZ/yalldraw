@@ -1,5 +1,5 @@
 $ ->
-  class paper.TooledStateMachine extends paper.Tool
+  class paper.StateMachineTool extends paper.ToolDelegator
     constructor: (states, stateOptions) ->
       @states = states
       @state = stateOptions.initialState
@@ -15,3 +15,6 @@ $ ->
 
     @canTransition: (state) ->
       @states[state] && this.states[this.state][state]
+
+    onMouseDown: ->
+    onMouseDrag: ->
