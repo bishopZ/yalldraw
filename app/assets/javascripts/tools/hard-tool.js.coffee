@@ -1,13 +1,14 @@
 $ ->
   class paper.HardTool extends paper.Tool
     constructor: ->
+      console.log 'hard'
 
     onMouseMove: (event)->
       $('canvas').css 'cursor', 'move'
 
     onMouseDown: (event) ->
       paper.hoverSelection.clear()
-      paper.hardSelection.clear() if !event.mouse.shiftKey
+      paper.hardSelection.clear() if !event?.mouse?.shiftKey
       paper.hardSelection.add event.hitTest.item
 
 

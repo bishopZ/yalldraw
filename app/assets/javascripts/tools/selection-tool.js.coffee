@@ -15,19 +15,18 @@ $ ->
               event.hitTest?.item
           'none': {}
 
-        'mouseDown': [
-          'resize'
+        'mouseDown':
+          'resize':
             'predicate': (event) ->
-              event.hitTest.item.handle
+              event.hitTest?.item?.handle
             'persist': (event) ->
               'selectedBox': event.hitTest.item
-          'hard'
-            'predicate' : (event) ->
-              event.hitTest
-          'none': null
-        ]
+          'hard':
+            'predicate': (event) ->
+              event.hitTest?.item
+          'none': {}
 
-        'mouseDrag': [
+        'mouseDrag':
           'resize':
             'predicate': (event) ->
               event.hardSelection.items.length &&
@@ -35,7 +34,7 @@ $ ->
           'hard':
             'predicate': (event) ->
                paper.hardSelection.items.length
-        ]
+
       , 'none': null
       )
 

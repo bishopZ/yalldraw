@@ -33,8 +33,12 @@ $ ->
         tool = @toolByName toolName
         tool.onMouseMove @wrapEvent event
 
-    onMouseDown: ->
-      null
+    onMouseDown: (event)->
+      toolName = @toolForEvent 'mouseDown', @wrapEvent event
+      if toolName
+        tool = @toolByName toolName
+        tool.onMouseDown @wrapEvent event
+
     onMouseDrag: ->
       null
 
