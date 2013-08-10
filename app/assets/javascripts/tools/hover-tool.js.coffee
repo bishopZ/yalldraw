@@ -4,7 +4,6 @@ $ ->
 
     onMouseMove: (event)->
       paper.hoverSelection.add event.hitTest.item
-      event.hitTest.item.selected = true
 
     onMouseDown: (event) ->
 
