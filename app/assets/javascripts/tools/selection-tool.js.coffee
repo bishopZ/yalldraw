@@ -3,43 +3,39 @@ $ ->
   class paper.SelectionTool extends paper.StateMachineTool
     constructor: () ->
       super(
-        new StateMachineTool
-          'none'
-            'mouseMove': [
-              'resize':
-                'predicate': (event) ->
-                  event.hitTest.item.handle
-              'hard':
-                'predicate': (event) ->
-                  event.hitTest.item = paper.hardSelection.item
-              'hover':
-                'predicate': (event) ->
-                  event.hitTest.item
-              'none'
-            ]
+        'mouseMove':
+          'resize':
+            'predicate': (event) ->
+              event.hitTest.item.handle
+          'hard':
+            'predicate': (event) ->
+              event.hitTest.item = paper.hardSelection.item
+          'hover':
+            'predicate': (event) ->
+              event.hitTest.item
+          'none': undefined
 
-            'mouseDown': [
-              'resize'
-                'predicate': (event) ->
-                  event.hitTest.item.handle
-                'persist': (event) ->
-                  'selectedBox': event.hitTest.item
-              'hard'
-                'predicate' : (event) ->
-                  event.hitTest
-              'none'
-            ]
+        'mouseDown': [
+          'resize'
+            'predicate': (event) ->
+              event.hitTest.item.handle
+            'persist': (event) ->
+              'selectedBox': event.hitTest.item
+          'hard'
+            'predicate' : (event) ->
+              event.hitTest
+          'none': undefined
+        ]
 
-            'mouseDrag': [
-              'resize':
-                'predicate': (event) ->
-                  event.hardSelection.items.length &&
-                    event.hitTest.item.handle
-              'hard':
-                'predicate': (event) ->
-                   paper.hardSelection.items.length
-            ]
-            , 'none'
-          )
-
+        'mouseDrag': [
+          'resize':
+            'predicate': (event) ->
+              event.hardSelection.items.length &&
+                event.hitTest.item.handle
+          'hard':
+            'predicate': (event) ->
+               paper.hardSelection.items.length
+        ]
+      , 'none': undefined
+      )
 

@@ -5,12 +5,6 @@ $ ->
       @selection = null
       @box = null
       @resizeDirection
-      @hitOptions =
-        segment   : true
-        fill      : true
-        stroke    : true
-        tolerance : 5
-
     styleChange: (s) ->
       @selection.children.filter((e) -> e.type).map( (e) -> e.style = s )
 
