@@ -8,8 +8,7 @@ $ ->
 
     onMouseDown: (event) ->
       paper.hoverSelection.clear()
-      paper.hardSelection.clear() if !event?.mouse?.shiftKey
-      paper.hardSelection.add event.hitTest.item
+      paper.hardSelection.put event.hitTest.item, !!event?.mouse?.shiftKey
 
 
     onMouseDrag: (event) ->

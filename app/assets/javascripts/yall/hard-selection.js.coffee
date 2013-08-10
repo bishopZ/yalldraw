@@ -5,6 +5,11 @@ $ ->
       @selection = null
       @boundingBox = null
 
+    put: (item, alongside) ->
+      unless @selection?.isChild item
+        @clear() if alongside
+        @add item
+
     add: (item) ->
       if @selection
         @boundingBox.remove()

@@ -28,6 +28,8 @@ $ ->
       g.box = true
       g.translate(new paper.Point(size * -.5, size * -.5))
       @box = g
+      @box.style.strokeColor = 'black'
+      @box.style.fillColor = 'white'
 
     resizeBoxes: ->
       return unless @box
