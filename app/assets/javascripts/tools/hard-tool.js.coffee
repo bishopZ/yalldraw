@@ -13,9 +13,8 @@ $ ->
     onMouseDrag: (event) ->
       # TODO: what happened to event.delta ??
       if @oldPoint
-        delta = @oldPoint.subtract @createPoint event
         delta = @createPoint(event).subtract @oldPoint
-        paper.hardSelection.group.translate delta
+        paper.hardSelection?.group?.translate delta
         paper.hardSelection.boundingBox.resizeBoxes()
 
       @oldPoint = @createPoint event

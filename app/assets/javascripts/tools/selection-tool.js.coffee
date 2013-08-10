@@ -34,7 +34,7 @@ $ ->
           'hard':
             'predicate': (event) ->
                paper.hardSelection?.group?.children.length
-
-      , 'none': null
+          'none': {}
+      ,'none'
       )
 
