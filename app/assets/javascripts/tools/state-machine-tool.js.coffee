@@ -1,7 +1,7 @@
 #= require tools/tool-delegator
 
 $ ->
-  class paper.StateMachineTool extends paper.ToolDelegator
+  class paper.StateMachineTool extends paper.Tool
     constructor: (states, stateOptions) ->
       @states = states
       @state = stateOptions.initialState
