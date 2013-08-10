@@ -29,11 +29,11 @@ $ ->
         'mouseDrag':
           'resize':
             'predicate': (event) ->
-              event.hardSelection.items.length &&
+              event.hardSelection?.group?.children.length &&
                 event.hitTest.item.handle
           'hard':
             'predicate': (event) ->
-               paper.hardSelection.items.length
+               paper.hardSelection?.group?.children.length
 
       , 'none': null
       )

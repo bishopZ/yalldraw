@@ -39,8 +39,11 @@ $ ->
         tool = @toolByName toolName
         tool.onMouseDown @wrapEvent event
 
-    onMouseDrag: ->
-      null
+    onMouseDrag: (event) ->
+      toolName = @toolForEvent 'mouseDrag', @wrapEvent event
+      if toolName
+        tool = @toolByName toolName
+        tool.onMouseDrag @wrapEvent event
 
     toolForEvent: (eventName, event) ->
       @meetsPredicate eventName, event
