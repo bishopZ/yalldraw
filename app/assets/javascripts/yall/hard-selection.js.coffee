@@ -3,16 +3,26 @@ $ ->
     constructor: ->
       @items = []
       @selection = null
+      @boundingBox = null
 
     add: (item) ->
-      @selection.remove() if @selection
+      if @selection
+        @boundingBox.remove()
 
-      if item.isAbove @selection
-        @selection.addChild item
+        if item.isAbove @selection
+          @selection.addChild item
+        else
+          @selection.insertChild 0, item
       else
-        @selection.insertChild 0, item
+        @selection = new paper.Group()
+        paper.project.activeLayer.insertChild item.index, @selection
+        nextHighest = item.nextSibling
+        item.oldIndex = item.index
+        @selection.insertChild item.index, item
+
+      @boundingBox = new paper.BoundingBox @selection unless @boundingBox
 
     clear: ->
-      @selection=  new paper.Group()
+      @selection && @selection.remove() if @selection
 
   paper.hardSelection = new HardSelection()

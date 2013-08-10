@@ -1,31 +1,33 @@
 $ ->
-  class BoundingBox
+  class paper.BoundingBox
     constructor: (item) ->
-        size = Math.min 10, Math.sqrt(Math.min @selection.strokeBounds.width, @selection.strokeBounds.height)
-        nE = paper.Path.Rectangle item.bounds.topLeft.clone(), size
-        n = paper.Path.Rectangle item.bounds.topCenter.clone(), size
-        nW = paper.Path.Rectangle item.bounds.topRight.clone(), size
-        w = paper.Path.Rectangle item.bounds.rightCenter.clone(), size
-        sW = paper.Path.Rectangle item.bounds.bottomRight.clone(), size
-        s = paper.Path.Rectangle item.bounds.bottomCenter.clone(), size
-        sE = paper.Path.Rectangle item.bounds.bottomLeft.clone(), size
-        e = paper.Path.Rectangle item.bounds.leftCenter.clone(), size
+      @selection = item
+      
+      size = Math.min 10, Math.sqrt(Math.min @selection.strokeBounds.width, @selection.strokeBounds.height)
+      nE = paper.Path.Rectangle item.bounds.topLeft.clone(), size
+      n = paper.Path.Rectangle item.bounds.topCenter.clone(), size
+      nW = paper.Path.Rectangle item.bounds.topRight.clone(), size
+      w = paper.Path.Rectangle item.bounds.rightCenter.clone(), size
+      sW = paper.Path.Rectangle item.bounds.bottomRight.clone(), size
+      s = paper.Path.Rectangle item.bounds.bottomCenter.clone(), size
+      sE = paper.Path.Rectangle item.bounds.bottomLeft.clone(), size
+      e = paper.Path.Rectangle item.bounds.leftCenter.clone(), size
 
-        nE.handle = 'nw'
-        n.handle = 'n'
-        nW.handle = 'ne'
-        w.handle = 'e'
-        sW.handle = 'se'
-        s.handle = 's'
-        sE.handle = 'sw'
-        e.handle = 'w'
+      nE.handle = 'nw'
+      n.handle = 'n'
+      nW.handle = 'ne'
+      w.handle = 'e'
+      sW.handle = 'se'
+      s.handle = 's'
+      sE.handle = 'sw'
+      e.handle = 'w'
 
-        points = [nE, n, nW, w, sW, s, sE, e]
-        p.box = true for p in points
-        g = new paper.Group points
-        g.box = true
-        g.translate(new paper.Point(size * -.5, size * -.5))
-        @box = g
+      points = [nE, n, nW, w, sW, s, sE, e]
+      p.box = true for p in points
+      g = new paper.Group points
+      g.box = true
+      g.translate(new paper.Point(size * -.5, size * -.5))
+      @box = g
 
     resizeBoxes: ->
       return unless @box
@@ -67,5 +69,8 @@ $ ->
         bounds = @selection.bounds.setBottomLeft e.point
 
       @selection.setBounds bounds
+
+    remove: ->
+      @selection.remove()
 
 
