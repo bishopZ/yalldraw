@@ -74,5 +74,6 @@ $ ->
 
     remove: ->
       @selection.remove()
+      @box.remove()
 
 

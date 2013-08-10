@@ -28,6 +28,22 @@ $ ->
       @boundingBox = new paper.BoundingBox @selection unless @boundingBox
 
     clear: ->
-      @selection && @selection.remove() if @selection
+      @unSelect()
+      @boundingBox.remove() if @boundingBox
+      @boundingBox = null
+
+    unSelect: ->
+      return if !@selection
+      children = @selection.children.sort (a, b)->
+        a.index > b.index
+
+      i = 0
+      limit = @selection.children.length
+      while i++ < limit
+        paper.project.activeLayer.insertChild children[children.length - 1].oldIndex, children[children.length - 1]
+
+      @selection.remove()
+      @selection = null
+
 
   paper.hardSelection = new HardSelection()

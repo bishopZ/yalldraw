@@ -9,10 +9,10 @@ $ ->
               event.hitTest?.item?.handle
           'hard':
             'predicate': (event) ->
-              event.hitTest?.item && paper?.hardSelection?.item
+              event.hitTest?.item && paper?.hardSelection?.items.length
           'hover':
             'predicate': (event) ->
-              event.hitTest?.item
+              event.hitTest?.item && !(paper?.hardSelection?.items.length)
           'none': {}
 
         'mouseDown':
