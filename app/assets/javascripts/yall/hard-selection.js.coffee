@@ -6,12 +6,13 @@ $ ->
 
     put: (item, alongside) ->
       unless @group?.isChild item
-        @clear() if alongside
+        @clear() unless alongside
         @add item
 
     add: (item) ->
       if @group
         @boundingBox.remove()
+        @boundingBox = null
 
         if item.isAbove @group
           @group.addChild item

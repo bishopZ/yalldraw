@@ -73,7 +73,5 @@ $ ->
       @selection.setBounds bounds
 
     remove: ->
-      @selection.remove()
       @box.remove()
-
 

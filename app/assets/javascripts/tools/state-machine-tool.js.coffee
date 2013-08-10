@@ -73,6 +73,6 @@ $ ->
         else if properties && !properties['predicate']
           return toolName
 
-      last unless @states[last]['predicate']
+      last unless @states[last] && @states[last]['predicate']
 
 
