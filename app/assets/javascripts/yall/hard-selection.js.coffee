@@ -1,49 +1,49 @@
 $ ->
   class HardSelection
     constructor: ->
-      @items = []
-      @selection = null
+      @group = null
       @boundingBox = null
 
     put: (item, alongside) ->
-      unless @selection?.isChild item
+      unless @group?.isChild item
         @clear() if alongside
         @add item
 
     add: (item) ->
-      if @selection
+      if @group
         @boundingBox.remove()
 
-        if item.isAbove @selection
-          @selection.addChild item
+        if item.isAbove @group
+          @group.addChild item
         else
-          @selection.insertChild 0, item
+          @group.insertChild 0, item
       else
-        @selection = new paper.Group()
-        paper.project.activeLayer.insertChild item.index, @selection
+        @group = new paper.Group()
+        paper.project.activeLayer.insertChild item.index, @group
         nextHighest = item.nextSibling
         item.oldIndex = item.index
-        @selection.insertChild item.index, item
+        @group.insertChild item.index, item
 
-      @boundingBox = new paper.BoundingBox @selection unless @boundingBox
+      @boundingBox = new paper.BoundingBox @group unless @boundingBox
 
     clear: ->
       @unSelect()
       @boundingBox.remove() if @boundingBox
       @boundingBox = null
+      @items = []
 
     unSelect: ->
-      return if !@selection
-      children = @selection.children.sort (a, b)->
+      return if !@group
+      children = @group.children.sort (a, b)->
         a.index > b.index
 
       i = 0
-      limit = @selection.children.length
+      limit = @group.children.length
       while i++ < limit
         paper.project.activeLayer.insertChild children[children.length - 1].oldIndex, children[children.length - 1]
 
-      @selection.remove()
-      @selection = null
+      @group.remove()
+      @group = null
 
 
   paper.hardSelection = new HardSelection()
