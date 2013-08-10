@@ -34,7 +34,7 @@ var yall = (function(my) {
       toolName = $(this).text().toLowerCase();
 
       if (toolName === 'arrow') {
-        ///paper.tool = new paper.SelectionTool();
+        paper.tool = new paper.SelectionTool();
         //paper.tool.bind('remove', yall.persister.remove);
         //paper.tool.bind('modify', yall.persister.modify);
       } else {

@@ -6,14 +6,14 @@ $ ->
         'mouseMove':
           'resize':
             'predicate': (event) ->
-              event.hitTest.item.handle
+              event.hitTest?.item?.handle
           'hard':
             'predicate': (event) ->
-              event.hitTest.item = paper.hardSelection.item
+              event.hitTest?.item && paper?.hardSelection?.item
           'hover':
             'predicate': (event) ->
-              event.hitTest.item
-          'none': undefined
+              event.hitTest?.item
+          'none': {}
 
         'mouseDown': [
           'resize'
@@ -24,7 +24,7 @@ $ ->
           'hard'
             'predicate' : (event) ->
               event.hitTest
-          'none': undefined
+          'none': null
         ]
 
         'mouseDrag': [
@@ -36,6 +36,6 @@ $ ->
             'predicate': (event) ->
                paper.hardSelection.items.length
         ]
-      , 'none': undefined
+      , 'none': null
       )
 

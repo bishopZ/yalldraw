@@ -13,6 +13,8 @@ $ ->
 
       @tools = {}
 
+      super()
+
     transition: (state, properties) ->
       if @canTransition state
         @states[this.state].off && this.states[this.state].off properties
@@ -26,16 +28,21 @@ $ ->
       @states[state] && this.states[this.state][state]
 
     onMouseMove: (event)->
-      toolName = @meetsPredicate 'mouseMove', @wrapEvent event
-      tool = @toolByName toolName
+      toolName = @toolForEvent 'mouseMove', @wrapEvent event
+      if toolName
+        tool = @toolByName toolName
+        tool.onMouseMove @wrapEvent event
 
     onMouseDown: ->
       null
     onMouseDrag: ->
       null
 
+    toolForEvent: (eventName, event) ->
+      @meetsPredicate eventName, event
+
     wrapEvent: (event) ->
-        event: event
+        event: event.event
         hitTest: paper.project.hitTest event.point, @hitOptions
 
     toolByName: (name) ->
@@ -45,14 +52,20 @@ $ ->
 
     toolName: (name) ->
       chars = name.split ''
-      chars[0].toUpperCase()
+      chars[0] = chars[0].toUpperCase()
       (chars.join('') + 'Tool')
 
-    meetsPredicate: (name, event) ->
-      for toolName, properties of @states[name]
-        if properties['predicate'] && properties['predicate'](event)
+    meetsPredicate: (eventName, event) ->
+      last = null
+
+      for toolName, properties of @states[eventName]
+        last = toolName
+        # sure would be nice to not preface the condtionals
+        if properties && properties['predicate'] && properties['predicate'](event)
           return toolName
-        else if !properties['predicate']
+        else if properties && !properties['predicate']
           return toolName
+
+      last unless @states[last]['predicate']
 
 
