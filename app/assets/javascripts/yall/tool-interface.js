@@ -2,7 +2,8 @@ var yall = (function(my) {
   var tool = null;
 
   my.initTool = function () {
-    tool = new paper.ToolHandler(this.style && this.style());
+    toolHandler = new paper.ToolHandler(this.style && this.style());
+    tool = toolHandler
     //tool.bind('add', yall.persister.add);
 
     var colorOptions = {
@@ -34,15 +35,19 @@ var yall = (function(my) {
       toolName = $(this).text().toLowerCase();
 
       if (toolName === 'arrow') {
-        paper.tool = new paper.SelectionTool();
+        // SelectionTool should not be delegated from ToolHandler because ToolHandler aims to just send one time events, SelectionTool has to manage state
+        tool = new paper.SelectionTool();
+        tool.activate()
         //paper.tool.bind('remove', yall.persister.remove);
         //paper.tool.bind('modify', yall.persister.modify);
       } else {
         if (paper.tool && paper.tool.unSelect)
           paper.tool.unSelect();
-          my.refresh()
+
+        tool = toolHandler
+        my.refresh();
         yall.getTool().switchTool(toolName);
-        paper.tool = yall.getTool();
+        yall.getTool().activate()
       }
     });
   };
