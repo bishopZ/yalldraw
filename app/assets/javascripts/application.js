@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.slider
 //= require colorpicker.js
-//= require twitter/bootstrap
+//= require bootstrap
 //= require paper
 //= require_tree ./tools
 //= require_tree ./yall
