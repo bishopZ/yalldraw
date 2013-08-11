@@ -51,27 +51,6 @@ $ ->
       se.setPosition @selection.bounds.getBottomLeft()
       e.setPosition @selection.bounds.getLeftCenter()
 
-    resize: (e) ->
-      bounds = null
-      if @resizeDirection == 'n'
-        bounds = @selection.bounds.setTop e.point.y
-      else if @resizeDirection == 's'
-        bounds = @selection.bounds.setBottom e.point.y
-      else if @resizeDirection == 'w'
-        bounds = @selection.bounds.setLeft e.point.x
-      else if @resizeDirection == 'e'
-        bounds = @selection.bounds.setRight e.point.x
-      else if @resizeDirection == 'ne'
-        bounds = @selection.bounds.setTopRight e.point
-      else if @resizeDirection == 'se'
-        bounds = @selection.bounds.setBottomRight e.point
-      else if @resizeDirection == 'nw'
-        bounds = @selection.bounds.setTopLeft e.point
-      else if @resizeDirection == 'sw'
-        bounds = @selection.bounds.setBottomLeft e.point
-
-      @selection.setBounds bounds
-
     remove: ->
       @box.remove()
 
