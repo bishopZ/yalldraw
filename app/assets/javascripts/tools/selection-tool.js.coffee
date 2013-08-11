@@ -29,8 +29,9 @@ $ ->
         'mouseDrag':
           'resize':
             'predicate': (event) ->
-              event.hardSelection?.group?.children.length &&
-                event.hitTest.item.handle
+              paper.hardSelection?.group?.children.length &&
+                event.hitTest?.item?.handle
+            'sticky': 'true'
           'hard':
             'predicate': (event) ->
                paper.hardSelection?.group?.children.length

@@ -5,6 +5,8 @@ $ ->
     constructor: (states, stateOptions) ->
       @states = states
       @state = stateOptions.initialState
+      @lastTool = null
+      @lastEvent = null
       @hitOptions =
         segment   : true
         fill      : true
@@ -15,35 +17,25 @@ $ ->
 
       super()
 
-    transition: (state, properties) ->
-      if @canTransition state
-        @states[this.state].off && this.states[this.state].off properties
-        @state = state
-        @states[this.state].on && this.states[this.state].on properties
-        true
+    onMouseMove: (event) -> @on 'mouseMove', event
+    onMouseDown: (event) -> @on 'mouseDown', event
+    onMouseDrag: (event) -> @on 'mouseDrag', event
+
+    on: (eventName, event) ->
+      if eventName == @lastEvent
+        if @lastTool && @states[eventName][@lastTool]['sticky']
+          toolName = @lastTool
       else
-        false
+        @lastEvent = null
 
-    canTransition: (state) ->
-      @states[state] && this.states[this.state][state]
+      toolName = toolName || @toolForEvent eventName, @wrapEvent event
 
-    onMouseMove: (event)->
-      toolName = @toolForEvent 'mouseMove', @wrapEvent event
       if toolName
+        @lastEvent = eventName
+        @lastTool = toolName
         tool = @toolByName toolName
-        tool.onMouseMove @wrapEvent event
+        tool[@eventName eventName] @wrapEvent event
 
-    onMouseDown: (event)->
-      toolName = @toolForEvent 'mouseDown', @wrapEvent event
-      if toolName
-        tool = @toolByName toolName
-        tool.onMouseDown @wrapEvent event
-
-    onMouseDrag: (event) ->
-      toolName = @toolForEvent 'mouseDrag', @wrapEvent event
-      if toolName
-        tool = @toolByName toolName
-        tool.onMouseDrag @wrapEvent event
 
     toolForEvent: (eventName, event) ->
       @meetsPredicate eventName, event
@@ -57,10 +49,15 @@ $ ->
         @tools[name] = new paper[@toolName name]()
       @tools[name]
 
+    eventName: (name) ->
+      chars = name.split ''
+      chars[0] = chars[0].toUpperCase()
+      'on' + chars.join('')
+
     toolName: (name) ->
       chars = name.split ''
       chars[0] = chars[0].toUpperCase()
-      (chars.join('') + 'Tool')
+      chars.join('') + 'Tool'
 
     meetsPredicate: (eventName, event) ->
       last = null
