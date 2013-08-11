@@ -1,5 +1,11 @@
 $ ->
   class paper.ToolDelegator extends paper.Tool
+    constructor: ->
+      super()
+
+    onHandleEvent: (type, pt, event) ->
+      super(type, pt, event)
+
     onMouseDrag: (e) ->
       return if !@tool or !@tool.onMouseDrag
       @tool.onMouseDrag e.point
