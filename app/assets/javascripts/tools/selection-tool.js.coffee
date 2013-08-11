@@ -39,3 +39,6 @@ $ ->
       ,'none'
       )
 
+    styleChange: (style) ->
+      paper.hardSelection.group.children.filter((e) -> e.type).map( (e) -> e.style = style )
+
