@@ -32,6 +32,7 @@ var yall = (function(my) {
     });
 
     $('.btn-group button').on('click', function(e) {
+      paper.hardSelection.clear()
       toolName = $(this).text().toLowerCase();
 
       if (toolName === 'arrow') {
