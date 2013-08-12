@@ -13,14 +13,11 @@
 
 ActiveRecord::Schema.define(version: 20121112070030) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "drawings", force: true do |t|
     t.string   "slug"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "drawings", ["user_id", "slug"], name: "drawings_user", unique: true
@@ -30,8 +27,8 @@ ActiveRecord::Schema.define(version: 20121112070030) do
     t.integer  "user_id"
     t.integer  "z"
     t.text     "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "graphics", ["id", "drawing_id"], name: "graphics_key", unique: true
@@ -39,8 +36,8 @@ ActiveRecord::Schema.define(version: 20121112070030) do
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "users", ["name"], name: "index_users_on_name"
