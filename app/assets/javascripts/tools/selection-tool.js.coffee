@@ -2,39 +2,45 @@
 $ ->
   class paper.SelectionTool extends paper.StateMachineTool
     constructor: () ->
+      hasHardSelection = ->
+        paper.hardSelection?.group?.children.length
+
+      hitsHandle = (event) ->
+        event.hitTest?.item?.handle
+
+      hitsItem = (event) ->
+        event.hitTest?.item
+
       super(
         'mouseMove':
           'resize':
             'predicate': (event) ->
-              event.hitTest?.item?.handle
+              hitsHandle event
           'hard':
             'predicate': (event) ->
-              event.hitTest?.item && paper.hardSelection?.group?.children.length
+              hitsHandle(event) && hasHardSelection()
           'hover':
             'predicate': (event) ->
-              event.hitTest?.item && !(paper.hardSelection?.group?.children.length)
+              hitsItem(event) && !(hasHardSelection())
           'none': {}
 
         'mouseDown':
           'resize':
             'predicate': (event) ->
-              event.hitTest?.item?.handle
-            'persist': (event) ->
-              'selectedBox': event.hitTest.item
+              hitsHandle(event)
           'hard':
             'predicate': (event) ->
-              event.hitTest?.item
+              hitsItem(event)
           'none': {}
 
         'mouseDrag':
           'resize':
             'predicate': (event) ->
-              paper.hardSelection?.group?.children.length &&
-                event.hitTest?.item?.handle
+              hasHardSelection() && hitsHandle(event)
             'sticky': 'true'
           'hard':
             'predicate': (event) ->
-               paper.hardSelection?.group?.children.length
+              hasHardSelection()
           'none': {}
       ,'none'
       )
