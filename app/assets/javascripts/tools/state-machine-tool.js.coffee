@@ -17,13 +17,13 @@ $ ->
 
       super()
 
-    onMouseMove: (event) -> @on 'mouseMove', event
-    onMouseDown: (event) -> @on 'mouseDown', event
-    onMouseDrag: (event) -> @on 'mouseDrag', event
+    onMouseMove: (event) -> @on 'onMouseMove', event
+    onMouseDown: (event) -> @on 'onMouseDown', event
+    onMouseDrag: (event) -> @on 'onMouseDrag', event
 
     on: (eventName, event) ->
       if eventName == @lastEvent
-        if @lastTool && @states[eventName][@lastTool]['sticky']
+        if @lastTool && @toolByName(@lastTool)[eventName + 'Sticky']
           toolName = @lastTool
       else
         @lastEvent = null
@@ -50,9 +50,7 @@ $ ->
       @tools[name]
 
     eventName: (name) ->
-      chars = name.split ''
-      chars[0] = chars[0].toUpperCase()
-      'on' + chars.join('')
+      name
 
     toolName: (name) ->
       chars = name.split ''
@@ -60,29 +58,29 @@ $ ->
       chars.join('') + 'Tool'
 
     meetsPredicate: (eventName, event) ->
-      class EventPredicate
-        constructor: (event) ->
-          @event = event
-
-        hasHardSelection: ->
-          paper.hardSelection?.group?.children.length
-
-        hitsHandle: ->
-          @event.hitTest?.item?.handle
-
-        hitsItem: ->
-          @event.hitTest?.item
-
       last = null
 
-      for toolName, properties of @states[eventName]
+      for toolName in @states[eventName]
         last = toolName
-        # sure would be nice to not preface the condtionals
-        if properties && properties['predicate'] && properties['predicate'](new EventPredicate event)
-          return toolName
-        else if properties && !properties['predicate']
+        tool = @toolByName(toolName)
+
+        if tool && tool[eventName + 'Predicate'] && tool[eventName + 'Predicate'](new EventPredicate event)
           return toolName
 
-      last unless @states[last] && @states[last]['predicate']
+      last unless @states[last] && @states[last]['Predicate']
+
+    class EventPredicate
+      constructor: (event) ->
+        @event = event
+
+      hasHardSelection: ->
+        paper.hardSelection?.group?.children.length
+
+      hitsHandle: ->
+        @event.hitTest?.item?.handle
+
+      hitsItem: ->
+        @event.hitTest?.item
+
 
 

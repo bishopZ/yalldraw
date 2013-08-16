@@ -1,10 +1,7 @@
 $ ->
   class paper.HoverTool extends paper.Tool
-    constructor: ->
+    onMouseMovePredicate: (event)->
+      event.hitsItem() && !event.hasHardSelection()
 
     onMouseMove: (event)->
       paper.hoverSelection.add event.hitTest.item
-
-    onMouseDown: (event) ->
-
-    onMouseDrag: (event) ->

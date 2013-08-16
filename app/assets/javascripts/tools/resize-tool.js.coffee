@@ -1,14 +1,24 @@
 class paper.ResizeTool extends paper.Tool
   constructor: ->
 
+  onMouseMovePredicate: (event) ->
+    event.hitsHandle()
+
   onMouseMove: (event)->
     $('canvas').css 'cursor', event.hitTest.item.handle + '-resize'
+
+  onMouseDownPredicate: (event) ->
+    event.hitsHandle()
 
   onMouseDown: (event) ->
     @direction = event.hitTest.item.handle
 
+  onMouseDragPredicate: (event) ->
+    event.hasHardSelection() && event.hitsHandle()
+
   onMouseDrag: (event) ->
     @resize @direction, paper.hardSelection.group, new paper.Point(event.event.layerX, event.event.layerY)
+  onMouseDragSticky: -> true
 
   resize: (direction, item, point) ->
     bounds = null
