@@ -60,12 +60,25 @@ $ ->
       chars.join('') + 'Tool'
 
     meetsPredicate: (eventName, event) ->
+      class EventPredicate
+        constructor: (event) ->
+          @event = event
+
+        hasHardSelection: ->
+          paper.hardSelection?.group?.children.length
+
+        hitsHandle: ->
+          @event.hitTest?.item?.handle
+
+        hitsItem: ->
+          @event.hitTest?.item
+
       last = null
 
       for toolName, properties of @states[eventName]
         last = toolName
         # sure would be nice to not preface the condtionals
-        if properties && properties['predicate'] && properties['predicate'](event)
+        if properties && properties['predicate'] && properties['predicate'](new EventPredicate event)
           return toolName
         else if properties && !properties['predicate']
           return toolName
