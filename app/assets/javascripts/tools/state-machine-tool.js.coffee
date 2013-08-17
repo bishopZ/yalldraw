@@ -69,18 +69,41 @@ $ ->
 
       last unless @states[last] && @states[last]['Predicate']
 
-    class EventPredicate
-      constructor: (event) ->
-        @event = event
+  class EventPredicate
+    constructor: (event) ->
+      @event = event
 
-      hasHardSelection: ->
-        paper.hardSelection?.group?.children.length
+    hasHardSelection: ->
+      paper.hardSelection?.group?.children.length
 
-      hitsHandle: ->
-        @event.hitTest?.item?.handle
+    hitsItem: ->
+      @event.hitTest?.item
 
-      hitsItem: ->
-        @event.hitTest?.item
+    hitsHandle: ->
+      @event.hitTest?.item?.handle
 
+    pastHandle: ->
+      ht = @event.hitTestDistant
+      return false unless ht?.item?.handle
+      mouseX = event.offsetX
+      mouseY = event.offsetY
+      handle = ht.item.handle
+      item = ht.item
 
-
+      # probably can do paper.hardSelection.inBounds? mouse
+      if 'w' == handle
+        return mouseX < item.bounds.left
+      else if 'nw' == handle
+        return mouseX < item.bounds.left && mouseY < item.bounds.top
+      else if 'n' == handle
+        return mouseY > item.bounds.top
+      else if 'ne' == handle
+        return mouseX > item.bounds.left && mouseY < item.bounds.top
+      else if 'e' == handle
+        return mouseX > item.bounds.left
+      else if 'se' == handle
+        return mouseX > item.bounds.left && mouseY > item.bounds.top
+      else if 's' == handle
+        return mouseY > item.bounds.top
+      else if 'sw' == handle
+        return mouseX < item.bounds.left && mouseY > item.bounds.top
