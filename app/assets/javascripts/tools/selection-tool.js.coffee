@@ -5,6 +5,7 @@ $ ->
       super(
         'onMouseMove': [
           'resize'
+          'rotate'
           'hard'
           'hover'
           'none'

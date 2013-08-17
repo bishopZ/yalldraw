@@ -12,6 +12,11 @@ $ ->
         fill      : true
         stroke    : true
         tolerance : 5
+      @hitOptionsDistant =
+        segment   : true
+        fill      : true
+        stroke    : true
+        tolerance : 55
 
       @tools = {}
 
@@ -43,6 +48,7 @@ $ ->
     wrapEvent: (event) ->
         event: event.event
         hitTest: paper.project.hitTest event.point, @hitOptions
+        hitTestDistant: paper.project.hitTest event.point, @hitOptionsDistant
 
     toolByName: (name) ->
       unless @tools[name]
