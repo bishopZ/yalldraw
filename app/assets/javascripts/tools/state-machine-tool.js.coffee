@@ -102,7 +102,7 @@ $ ->
       else if 'nw' == handle
         return mouseX < item.bounds.left && mouseY < item.bounds.top
       else if 'n' == handle
-        return mouseY > item.bounds.top
+        return mouseY < item.bounds.top
       else if 'ne' == handle
         return mouseX > item.bounds.left && mouseY < item.bounds.top
       else if 'e' == handle
