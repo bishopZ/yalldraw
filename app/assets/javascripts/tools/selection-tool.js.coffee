@@ -12,11 +12,13 @@ $ ->
         ]
         'onMouseDown': [
           'resize'
+          'rotate'
           'hard'
           'none'
         ]
         'onMouseDrag': [
           'resize'
+          'rotate'
           'hard'
           'none'
         ]
