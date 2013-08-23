@@ -1,5 +1,4 @@
 class paper.ResizeTool extends paper.Tool
-  constructor: ->
 
   onMouseMovePredicate: (event) ->
     event.hitsHandle()
