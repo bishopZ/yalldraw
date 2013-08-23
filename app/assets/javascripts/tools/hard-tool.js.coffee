@@ -1,7 +1,5 @@
 $ ->
   class paper.HardTool extends paper.Tool
-    constructor: ->
-
     onMouseMovePredicate: (event)->
       event.hitsHandle() && event.hasHardSelection()
 
