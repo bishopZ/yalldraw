@@ -5,17 +5,20 @@ $ ->
       super(
         'onMouseMove': [
           'resize'
+          'rotate'
           'hard'
           'hover'
           'none'
         ]
         'onMouseDown': [
           'resize'
+          'rotate'
           'hard'
           'none'
         ]
         'onMouseDrag': [
           'resize'
+          'rotate'
           'hard'
           'none'
         ]
