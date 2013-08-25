@@ -1,3 +1,9 @@
+.unselectable {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */          
+}
+
 html {
 	width: 100%;
 	height: 100%;
@@ -53,7 +59,7 @@ body {
 	color: #262626;
 }
 #easel {
-	background-color: #2d2d2d;
+	background-color: #000;
 	width: 100%;
 	height: 100%;
 	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
@@ -63,18 +69,17 @@ body {
 	height: 100%;
 	padding-left: 37px;
 	padding-top: 44px;
-	padding-bottom: 22px;
+	padding-bottom: 20px;
 	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-	padding-right: 10px;
 }
 #canvas {
 	width: 100%;
 	height:100%;
 	background-color: #FFF;
 	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-	border-right: 2px solid black;
-	border-bottom: 1px solid black;
-	border-left: 1px solid black;
+	border-right: 1px solid #2d2d2d;
+	border-bottom: 1px solid #2d2d2d;
+	border-left: 1px solid #2d2d2d;
 	border-radius: 0 0 3px 3px;
 }
 #tool-tray-container {
@@ -82,7 +87,7 @@ body {
 	height: 100%;
 	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 	padding-top: 44px;
-	padding-bottom: 22px;
+	padding-bottom: 20px;
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -98,9 +103,9 @@ body {
 	top: 0;
 	left: 0;
 	z-index: 1;
-	border-right: 1px solid black;
-	border-bottom: 1px solid black;
+	border: 1px solid #2d2d2d;
 	border-radius: 0 0 3px 0;
+	padding-top: 29px;
 }
 .tool-btn {
 	width: 37px;
@@ -109,14 +114,21 @@ body {
 	cursor: pointer;
 }
 .tool-btn-box {
-	border-radius: 3px;
+	border-radius: 2px;
 	border: 1px solid transparent;
 }
 .tool-btn:active .tool-btn-box {
-	background-color: #363636;
+	background: #4b4b4b; /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  #4b4b4b 0%, #3d3d3d 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#4b4b4b), color-stop(100%,#3d3d3d)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  #4b4b4b 0%,#3d3d3d 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  #4b4b4b 0%,#3d3d3d 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  #4b4b4b 0%,#3d3d3d 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  #4b4b4b 0%,#3d3d3d 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b4b4b', endColorstr='#3d3d3d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 .tool-btn:hover .tool-btn-box {
-	border-color: rgba(0,0,0, .62);
+	border-color: #2b2b2b;
 }
 .tool-icon {
 	border: 1px dotted #d5d5d5;
@@ -131,7 +143,7 @@ body {
 	bottom: 0;
 	height: 22px;
 	width: 100%;
-	padding-left: 48px;
+	padding-left: 53px;
 	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
 .footer-link {
