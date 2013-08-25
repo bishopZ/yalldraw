@@ -32,12 +32,13 @@ body {
 	position: relative;
 }
 #logo {
-	background-color: black;
-	height: 44px;
-	width: 71px;
+	height: 34px;
+	width: 250px;
 	display: inline-block;
 	position: fixed;
 	left: 56px;
+	background: url(https://s3.amazonaws.com/yalldraw/logo.png) center center no-repeat;
+	margin-top: 3px;
 }
 #nav-signin {
 	position: fixed;
@@ -80,7 +81,7 @@ body {
 	border-right: 1px solid #2d2d2d;
 	border-bottom: 1px solid #2d2d2d;
 	border-left: 1px solid #2d2d2d;
-	border-radius: 0 0 3px 3px;
+	border-radius: 0 0 4px 3px;
 }
 #tool-tray-container {
 	width: 38px;
@@ -104,7 +105,7 @@ body {
 	left: 0;
 	z-index: 1;
 	border: 1px solid #2d2d2d;
-	border-radius: 0 0 3px 0;
+	border-radius: 0 0 3px 4px;
 	padding-top: 29px;
 }
 .tool-btn {
@@ -131,11 +132,53 @@ body {
 	border-color: #2b2b2b;
 }
 .tool-icon {
-	border: 1px dotted #d5d5d5;
 	width: 14px;
 	height: 14px;
 	border-radius: 2px;
 	margin: 4px auto 5px auto;
+}
+#pencil-icon {
+	background: url();
+}
+#color-bucket-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/color-bucket.png) center center no-repeat;
+	width: 16px;
+	height: 17px;
+}
+#color-picker-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/color-picker.png) center center no-repeat;
+	width: 17px;
+	height: 17px;
+}
+#handtool-alt-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/handtool-alt.png) center center no-repeat;
+	width: 16px;
+	height: 17px;
+}
+#inactive-line-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/inactive-line.png) center center no-repeat;
+	width: 17px;
+	height: 17px;
+}
+#mouse-cursor-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/mouse-cursor.png) center center no-repeat;
+	width: 10px;
+	height: 17px;
+}
+#navigation-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/navigation.png) center center no-repeat;
+	width: 17px;
+	height: 17px;
+}
+#type-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/type.png) center center no-repeat;
+	width: 16px;
+	height: 16px;
+}
+#wand-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/wand.png) center center no-repeat;
+	width: 17px;
+	height: 17px;
 }
 #footer {
 	text-align: center;
