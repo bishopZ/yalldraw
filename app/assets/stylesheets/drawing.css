@@ -32,13 +32,13 @@ body {
 	position: relative;
 }
 #logo {
-	height: 34px;
+	height: 30px;
 	width: 250px;
 	display: inline-block;
 	position: fixed;
 	left: 56px;
 	background: url(https://s3.amazonaws.com/yalldraw/logo.png) center center no-repeat;
-	margin-top: 3px;
+	margin-top: 7px;
 }
 #nav-signin {
 	position: fixed;
@@ -138,7 +138,9 @@ body {
 	margin: 4px auto 5px auto;
 }
 #pencil-icon {
-	background: url();
+	background: url(https://s3.amazonaws.com/yalldraw/pencil.png) center center no-repeat;
+	width: 17px;
+	height: 17px;
 }
 #color-bucket-icon {
 	background: url(https://s3.amazonaws.com/yalldraw/color-bucket.png) center center no-repeat;
