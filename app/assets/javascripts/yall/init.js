@@ -12,3 +12,7 @@ var yall = (function(my) {
 
   return my;
 })(yall || {});
+
+$(function () {
+  yall.init($('canvas')[0], vectors);
+});
