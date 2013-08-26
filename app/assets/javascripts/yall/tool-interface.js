@@ -3,18 +3,21 @@ var yall = (function(my) {
 
   my.initTool = function () {
     toolHandler = new paper.ToolHandler(this.style && this.style());
-    tool = toolHandler
-    //tool.bind('add', yall.persister.add);
+    tool = toolHandler;
 
-    var colorOptions = {
-      realtime: true,
-      invertControls: false,
-      controlStyle: 'raised',
-      alpha: false
-    };
+    $('#fg-color').ColorPicker({
+      onChange: function (hsb, hex, rgb) {
+        $('#fg-color div').css('backgroundColor', '#' + hex);
+        yall.updateStyle();
+      }
+    });
 
-    $('input#fg-color').colorpicker(colorOptions);
-    $('input#bg-color').colorpicker(colorOptions);
+    $('#bg-color').ColorPicker({
+      onChange: function (hsb, hex, rgb) {
+        $('#bg-color div').css('backgroundColor', '#' + hex);
+        yall.updateStyle();
+      }
+    });
 
     $('#brush-size-slider').slider({
       min: 0,
@@ -31,9 +34,9 @@ var yall = (function(my) {
       my.updateStyle();
     });
 
-    $('.btn-group button').on('click', function(e) {
+    $('.tool-btn').click(function(e) {
       paper.hardSelection.clear()
-      toolName = $(this).text().toLowerCase();
+      toolName = $(this).data('tool');
 
       if (toolName === 'arrow') {
         // SelectionTool should not be delegated from ToolHandler because ToolHandler aims to just send one time events, SelectionTool has to manage state

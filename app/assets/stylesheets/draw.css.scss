@@ -1,28 +1,20 @@
-.navbar {
-  background-color: #666;
+h2 {
+  color: #ffffff;
+	font: normal 11px Roboto,arial,sans-serif;
 }
-.fill {
-  width: 100%;
-  height: 100%;
-}
-
-#canvas-container {
-  height: 100%;
-  width: 100%;
-  canvas {
-    border: 1px solid #666;
-  }
+#bg-color, #fg-color {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  background: url(/images/select.png);
 }
 
-.btn-group {
-  text-align: center;
-}
 
-#brush-size-text {
-  width: 40px;
+#bg-color div, #fg-color div {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 30px;
+  height: 30px;
+  background: url(/images/select.png) center;
 }
-
-.slider {
-  padding-top: 10px;
-}
-

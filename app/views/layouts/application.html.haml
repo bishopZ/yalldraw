@@ -1,10 +1,11 @@
 !!!
 %html
   %head
-    %title Yall Draw
-    = stylesheet_link_tag    "application", :media => "all"
+    %title YallDraw
+    = stylesheet_link_tag    'application', :media => 'all'
     = csrf_meta_tags
+    %meta{ name: 'description', content: 'YallDraw is a collaborative drawing environment and is where you go to draw with friends.' }
 
-  %body{ "data-drawing-id" => (@drawing) ? @drawing.id : '' }
+  %body{ 'data-drawing-id' => (@drawing) ? @drawing.id : '' }
     = yield
     = javascript_include_tag "application"
