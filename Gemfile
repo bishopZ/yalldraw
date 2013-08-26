@@ -3,7 +3,6 @@ source 'http://rubygems.org'
 gem 'rails', github: 'rails/rails'
 gem 'arel', github: 'rails/arel'
 
-gem 'sqlite3'
 gem 'pg'
 gem 'redis'
 gem 'bcrypt-ruby'
@@ -23,8 +22,8 @@ group :assets do
   gem 'sass-rails', github: 'rails/sass-rails'
   gem 'coffee-rails', github: 'rails/coffee-rails'
   gem 'uglifier', '>= 1.0.3'
-  gem 'haml', github: 'haml/haml'
 end
+gem 'haml', github: 'haml/haml'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
