@@ -1,4 +1,6 @@
 class DrawingsController < ApplicationController
+  layout 'application'
+
   def index
     show
   end

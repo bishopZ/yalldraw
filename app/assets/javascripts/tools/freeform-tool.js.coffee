@@ -10,7 +10,7 @@ $ ->
 
     onMouseUp:  (point) ->
       segs = @path.segments
-      @path.simplify(100)
+      @path.simplify 10
       if segs[0].point.getDistance(point) < 10
         @path.add new paper.Point segs[0].point
         @path.closed = true

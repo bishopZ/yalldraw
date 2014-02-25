@@ -2,18 +2,22 @@ var yall = (function(my) {
   var tool = null;
 
   my.initTool = function () {
-    tool = new paper.ToolHandler(this.style());
-    tool.bind('add', yall.persister.add);
+    toolHandler = new paper.ToolHandler(this.style && this.style());
+    tool = toolHandler;
 
-    var colorOptions = {
-      realtime: true,
-      invertControls: false,
-      controlStyle: 'raised',
-      alpha: false
-    };
+    $('#fg-color').ColorPicker({
+      onChange: function (hsb, hex, rgb) {
+        $('#fg-color div').css('backgroundColor', '#' + hex);
+        yall.updateStyle();
+      }
+    });
 
-    $('input#fg-color').colorpicker(colorOptions);
-    $('input#bg-color').colorpicker(colorOptions);
+    $('#bg-color').ColorPicker({
+      onChange: function (hsb, hex, rgb) {
+        $('#bg-color div').css('backgroundColor', '#' + hex);
+        yall.updateStyle();
+      }
+    });
 
     $('#brush-size-slider').slider({
       min: 0,
@@ -30,16 +34,24 @@ var yall = (function(my) {
       my.updateStyle();
     });
 
-    $('.btn-group button').on('click', function(e) {
-      toolName = $(this).text().toLowerCase();
+    $('.tool-btn').click(function(e) {
+      paper.hardSelection.clear()
+      toolName = $(this).data('tool');
 
       if (toolName === 'arrow') {
-        paper.tool = new paper.ArrowTool();
-        paper.tool.bind('remove', yall.persister.remove);
-        paper.tool.bind('modify', yall.persister.modify);
+        // SelectionTool should not be delegated from ToolHandler because ToolHandler aims to just send one time events, SelectionTool has to manage state
+        tool = new paper.SelectionTool();
+        tool.activate()
+        //paper.tool.bind('remove', yall.persister.remove);
+        //paper.tool.bind('modify', yall.persister.modify);
       } else {
+        if (paper.tool && paper.tool.unSelect)
+          paper.tool.unSelect();
+
+        tool = toolHandler
+        my.refresh();
         yall.getTool().switchTool(toolName);
-        paper.tool = yall.getTool();
+        yall.getTool().activate()
       }
     });
   };

@@ -1,0 +1,256 @@
+.unselectable {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */          
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	color: #737373;
+}
+body {
+	width: inherit;
+	height: inherit;
+}
+#header {
+	-webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.15);
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,.15);
+	background-color: #f5f5f5;
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+	height: 44px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 2;
+	padding-left: 39px;
+}
+.nav {
+	margin: 0 auto;
+	display: table;
+	position: relative;
+}
+#logo {
+	height: 30px;
+	width: 250px;
+	display: inline-block;
+	position: fixed;
+	left: 56px;
+	background: url(https://s3.amazonaws.com/yalldraw/logo.png) center center no-repeat;
+	margin-top: 7px;
+}
+#nav-signin {
+	position: fixed;
+	right: 38px;
+}
+.nav-link {
+	text-decoration: none;
+	display: inline-block;
+	font: normal 14px Roboto,arial,sans-serif;
+	float: left;
+}
+.header-link {
+	color: #737373;
+	line-height: 1.4;
+	padding: 13px 0 10px 0;
+	margin: 0 18px;
+}
+.header-link:hover {
+	color: #262626;
+}
+#easel {
+	background-color: #000;
+	width: 100%;
+	height: 100%;
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+#canvas-container {
+	width: 100%;
+	height: 100%;
+	padding-left: 37px;
+	padding-top: 44px;
+	padding-bottom: 20px;
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+#canvas {
+	width: 100%;
+	height:100%;
+	background-color: #FFF;
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+	border-right: 1px solid #2d2d2d;
+	border-bottom: 1px solid #2d2d2d;
+	border-left: 1px solid #2d2d2d;
+	border-radius: 0 0 4px 3px;
+}
+#tool-tray-container {
+	width: 38px;
+	height: 100%;
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+	padding-top: 44px;
+	padding-bottom: 20px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+#tool-tray {
+	height: 100%;
+	width 100%;
+	background:
+		#565656 
+	    url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAFwUlEQVRoQ42Zi27rMAxD1/34ti/frYxL4+SUTjdgaJImth4kJaWP7+/vz6+vr4/H4/GRv9/f33U413L88/Pz8bx3nefeHPP+uSd/czz/s/78zRpznM9ZJ/fsh54HucZnuSefn73n/PE8+OQieSAG+dNG8nsbmU0SqGZ07vE6dpJBiyMM9qThM4vEEDoWI5iZ+T73MkvZjBHlWnku15LxGM01mQ3en+tE0HJoMpIFA5/cPOfcnBvPdac+DjT40QDCz8af9uPaceySmUCLUeFx0kfD4yA54OfnfkMr14j3E3eyH/cgx4iKZWPIbtwRbuRNiHtynAIRI2OU+ZBzG3XimiF/4cg4ko1yIzc0N6xcfIYQZUSpWiQ8Iea9aZOVLzYwUDsjxB0jSOMcKRpLGBkCNJ5rkJNx6o5fll3avFTLWG5G0XvXHfPnXa1wVqyAgQzvM0rM050R6jYLXCMdCcrnKLtNtumgjW2ySg4FTnGA0FtZDEcapkkmVnZX5nCAWSOB6SB5QawHJlY0Okyucf0VtHGkkc4RYrGjclFJ2jpN5dzuEMoOnuuMA5HMX1oU9zNMJ3lBaW41xdmj0jXcn4xtwXPmgqQX1XL1dgPZmstWqJipBlFzL8HhZ5ymkgUprHtr/VGt9mXrg8IBq85J57lGAsKIMrMuupZmOsXAxKZNduu4jTPR7Axh8EJEjAjz3UnuLQo5N6zbWPDCkbaJ4daMybWT0iUTlM9WP5IJ7pHAZO2sRdhf2njik1FwMTJPaFxTMc4SqTvhCD/zLDNjLpl7CcZ2hFBhpLwRZxY768mRhvm4zS53KknnPGStTLkguqq3BtJtPqPUYGhSk39tIm1OOhDO2h6svLiJxxS7F8t3vs764WawcYHZ9ppcq/HnAq3cYBzTychdFiYBTxLJGcVF10Q2Ilom3AncQotjLqv3XTbipEnL6HqsZnRbhW+Fkr1dArnbeGLV+s0uNBH0hNgieYKriyM7A0KI8L5T0eXM839NiFm8vXtq7XSibrIyG3SOhPdLjrtMNuiRX9uOccRwifeN8FSoQMZVn/cQBp7nPX0yyxwVsl6rR7uOPL9cGXlXA1pb4HrDrCaSp1dKMc78sx2uGe4Gkp1LZU+Eg+3TMMUIuQv10BVItWdOvLQ0O3OG9eYIyWfiuXlsem5J5ZjbIkxOUMbbONCc9TNzvsluHJK0yRSx35yPgVS9Jgqc3VvvRe41uSZy9vrDEasA+y4/RNhRUcIzZzAbtZE3jltcyAvfM+ceGXZGWHRYna0crQfy/M61TFTyxfsweM6YHaNQbKg/L9Y6Yql0pbc005AYTPix9T/JNh04dRaEN48vHKF8tgjFeyoVHabKkRtsGAnVU2/m4cuwbfPQpbKfoh4unBo+VmrzJkZQTGjYu4Axux7gCOOLI+5ST60JZ467ghViura0ToBQJWQalyxAy4bGkUTVZGcEspkNaJ3pX2pRk+kmDoZjsnThSJPWuwmOGeNQZCHweExoMWiNyKeXd97j5ae31uSlaDU8Nxi0gkesswhyP4qIOwzvE3jlcztCqDi65gqhYkUhIeM4ZwkXNDtIUTC3aKOVcEMrxrWBiR2q4bcLkl7CxWBG0nMI2w9CjAG41Ir/e3DsiL17QrRMOnInEjvFOT9VdfdorbB62vQzLAfZZ0GL9aMNP5ZRR6lJZKJGXjnqJxglGIY4s+yi/PLu94RhQs8RY1Ys3XNuEscBN5K8/q740qm59/Jey9hky0GlaXCiER62qHrMFCPvdr4JjFWTQTrWEbbWlkgWRpKd3TGj3bpmPmcVvIOue7s9sz8XWb+PsGHkhHenWJRDV1yrH6MfYWky7lmDPKGQcIaadS6/IboFYYvAKNmB8CIGen4wLJtx2cvzzV9q2Np3MkI5o/EuZFaZRmw64241EWUm2ssKO8X6Yx5f6oiNb+0BNzd5CaM462ueMU4yT3U8iQHFJhn7B9uN7HrW3o0hAAAAAElFTkSuQmCC)
+	    repeat;
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	border: 1px solid #2d2d2d;
+	border-radius: 0 0 3px 4px;
+	padding-top: 29px;
+}
+.tool-btn {
+	width: 37px;
+	padding: 3px;
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+	cursor: pointer;
+}
+.tool-btn-box {
+	border-radius: 2px;
+	border: 1px solid transparent;
+}
+.tool-btn:active .tool-btn-box {
+	background: #4b4b4b; /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  #4b4b4b 0%, #3d3d3d 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#4b4b4b), color-stop(100%,#3d3d3d)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  #4b4b4b 0%,#3d3d3d 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  #4b4b4b 0%,#3d3d3d 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  #4b4b4b 0%,#3d3d3d 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  #4b4b4b 0%,#3d3d3d 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b4b4b', endColorstr='#3d3d3d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+.tool-btn:hover .tool-btn-box {
+	border-color: #2b2b2b;
+}
+.tool-icon {
+	width: 14px;
+	height: 14px;
+	border-radius: 2px;
+	margin: 4px auto 5px auto;
+}
+#pencil-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/pencil.png) center center no-repeat;
+	width: 17px;
+	height: 17px;
+}
+#color-bucket-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/color-bucket.png) center center no-repeat;
+	width: 16px;
+	height: 17px;
+}
+#color-picker-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/color-picker.png) center center no-repeat;
+	width: 17px;
+	height: 17px;
+}
+#handtool-alt-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/handtool-alt.png) center center no-repeat;
+	width: 16px;
+	height: 17px;
+}
+#inactive-line-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/inactive-line.png) center center no-repeat;
+	width: 17px;
+	height: 17px;
+}
+#mouse-cursor-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/mouse-cursor.png) center center no-repeat;
+	width: 10px;
+	height: 17px;
+}
+#navigation-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/navigation.png) center center no-repeat;
+	width: 17px;
+	height: 17px;
+}
+#type-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/type.png) center center no-repeat;
+	width: 16px;
+	height: 16px;
+}
+#wand-icon {
+	background: url(https://s3.amazonaws.com/yalldraw/wand.png) center center no-repeat;
+	width: 17px;
+	height: 17px;
+}
+#footer {
+	text-align: center;
+	position: absolute;
+	bottom: 0;
+	height: 22px;
+	width: 100%;
+	padding-left: 53px;
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+.footer-link {
+	color: #bbb;
+	text-decoration: none;
+	display: inline-block;
+	font: normal 11px Roboto,arial,sans-serif;
+	padding-top: 4px;
+	margin: 0 9px;
+}
+.footer-link:hover {
+	color: #fff;
+}
+
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* End Reset */

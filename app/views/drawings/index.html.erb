@@ -1,0 +1,112 @@
+<script>
+<%= raw "vectors = JSON.parse('#{@values || '{}'}'); " %>
+</script>
+
+<div id="header">
+    <div class="nav">
+        <a id="logo" href="#"></a>
+        <a class="header-link nav-link" href="#">Sign Up</a>
+        <a class="header-link nav-link" href="#">Explore</a>
+        <a class="header-link nav-link" href="#">Create</a>
+        <a class="header-link nav-link" id="nav-signin" href="#">Sign In</a>
+    </div>
+</div>
+
+<div id="easel" class="unselectable">
+    <div id="canvas-container">
+      <div id="canvas">
+        <canvas></canvas>
+      </div>
+    </div>
+
+    <div id="tool-tray-container">
+        <div id="tool-tray">
+            <div data-tool="arrow" class="tool-btn" title="Selection (V)">
+                <div class="tool-btn-box">
+                    <div id="mouse-cursor-icon" class="tool-icon"></div>
+                </div>
+            </div>
+
+            <div data-tool="freeform" class="tool-btn" title="Pencil (N)">
+                <div class="tool-btn-box">
+                    <div id="pencil-icon" class="tool-icon"></div>
+                </div>
+            </div>
+
+            <div class="tool-btn" title="Paint Bucket (G)">
+                <div class="tool-btn-box">
+                    <div id="color-bucket-icon" class="tool-icon"></div>
+                </div>
+            </div>
+
+            <div class="tool-btn" title="Hand (H)">
+                <div class="tool-btn-box">
+                    <div id="handtool-alt-icon" class="tool-icon"></div>
+                </div>
+            </div>
+
+            <div data-tool="line" class="tool-btn" title="Line (\)">
+                <div class="tool-btn-box">
+                    <div id="inactive-line-icon" class="tool-icon"></div>
+                </div>
+            </div>
+            
+            <div class="tool-btn" title="Move (V)">
+                <div class="tool-btn-box">
+                    <div id="navigation-icon" class="tool-icon"></div>
+                </div>
+            </div>
+
+            <div class="tool-btn" title="Text (T)">
+                <div class="tool-btn-box">
+                    <div id="type-icon" class="tool-icon"></div>
+                </div>
+            </div>
+
+            <div class="tool-btn" title="Quick Selection (W)">
+                <div class="tool-btn-box">
+                    <div id="wand-icon" class="tool-icon"></div>
+                </div>
+            </div>
+
+            <div class="tool-btn" title="Eyedropper (I)">
+                <div class="tool-btn-box">
+                    <div id="color-picker-icon" class="tool-icon"></div>
+                </div>
+            </div>
+
+            <h2>Stroke:</h2>
+
+            <div id="fg-color">
+                <div class="colorContainer" style="background-color: #000000">
+                </div>
+            </div>
+
+            <h2>Fill:</h2>
+
+            <div id="bg-color">
+                <div class="colorContainer" style="background-color: #FF1493">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="span1">
+                    <input id="brush-size-text" type="text" value="6" data-cip-id="brush-size-text">
+                </div>
+                <div class="slider span2">
+                    <div id="brush-size-slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 60%;"></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="footer">
+    <div class="nav">
+        <a class="footer-link nav-link" href="#">about</a>
+        <a class="footer-link nav-link" href="#">meta</a>
+        <a class="footer-link nav-link" href="http://github.com/earlearlearl/yalldraw">github</a>
+    </div>
+</div>

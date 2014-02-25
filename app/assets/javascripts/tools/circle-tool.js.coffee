@@ -1,7 +1,6 @@
 $ ->
   class paper.CircleTool extends paper.Tool
     constructor: (point) ->
-      super()
       @point = point
 
     onMouseDrag: (point) ->

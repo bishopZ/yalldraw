@@ -1,7 +1,6 @@
 $ ->
   class paper.RectangleTool extends paper.Tool
     constructor: (point) ->
-      super()
       @point = point
       @path = new paper.Path.Rectangle point, point
       @path.type = 'Rectangle'

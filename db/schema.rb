@@ -9,35 +9,37 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121112070030) do
+ActiveRecord::Schema.define(version: 20121112070030) do
 
-  create_table "drawings", :force => true do |t|
+  create_table "drawings", force: true do |t|
     t.string   "slug"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "drawings", ["user_id", "slug"], :name => "drawings_user", :unique => true
+  add_index "drawings", ["user_id", "slug"], name: "drawings_user", unique: true
 
-  create_table "graphics", :force => true do |t|
+  create_table "graphics", force: true do |t|
     t.integer  "drawing_id"
     t.integer  "user_id"
     t.integer  "z"
     t.text     "value"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "graphics", ["id", "drawing_id"], :name => "graphics_key", :unique => true
+  add_index "graphics", ["id", "drawing_id"], name: "graphics_key", unique: true
 
-  create_table "users", :force => true do |t|
+  create_table "users", force: true do |t|
     t.string   "name"
     t.string   "password"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "users", ["name"], name: "index_users_on_name"
 
 end
